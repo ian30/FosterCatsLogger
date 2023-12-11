@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" title="logo" href="#"
+          ><img src="/images/cat.png" width="50" alt=""
+        /></a>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" id="addNewCat">
+            Add Cat
+          </button>
+
+          <button type="button" class="btn btn-secondary" id="aboutBtn">About</button>
+        </div>
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Hello, Maria!</h1>
+      <p>
+        This app is very easy to use, just click <kbd>Add Cat</kbd> to, fill in the deets
+        and you're good to go with weight tracking and medication dosing.
+      </p>
+    </div>
+    <div class="container pagesContainer">
+      <div class="page p-3 firstPage" id="catsTable">
+        <strong>Page#catsTable</strong>
+        <p>this is where all current residents (cats) are listed.</p>
+        <table class="table">
+          <thead>
+            <th>#</th>
+            <th>Name</th>
+            <!-- <th>DOB</th> -->
+            <th>Gender</th>
+            <th>Age</th>
+            <th class="text-center">Weight</th>
+            <th class="text-center">Action</th>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="page p-3 rounded-3" id="addNewCatForm">
+        <div id="addCatFormWrapper">
+            <form action="addCat.js" method="post" id="addCatForm" class="needs-validation">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 p-4 m-2 border-secondary-subtle  border rounded-2 ">
+                        <strong>General Info:</strong>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Name</span>
+                                <input type="text" name="addNewCatName" id="addNewCatName" class="form-control" required>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Date of Birth</span>
+                                <input type="date" name="addNewCatDOB" id="addNewCatDOB" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Gender</span>
+                                <select name="addNewCatGender" id="addNewCatGender" class="form-select" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Age </span>
+                                <input type="text" name="addNewCatAge" placeholder="(calculated automatically)" id="addNewCatAge" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Breed</span>
+                                <select name="addNewCatBreed" id="addNewCatBreed" class="form-select" required>
+                                    <option value="Tabby">Tabby</option>
+                                    <option value="American Shorthair">American Shorthair</option>
+                                    <option value="Maine Coon">Maine Coon</option>
+                                    <option value="Persian">Persian</option>
+                                    <option value="Ragdoll">Ragdoll</option>
+                                    <option value="Scottish Fold">Scottish Fold</option>
+                                    <option value="Siamese">Siamese</option>
+                                    <option value="Sphynx">Sphynx</option>
+                                    <option value="Abyssinian">Abyssinian</option>
+                                    <option value="Devon Rex">Devon Rex</option>
+                                    <option value="Himalayan">Himalayan</option>
+                                    <option value="Manx">Manx</option>
+                                    <option value="Siberian">Siberian</option>
+                                    <option value="Turkish Angora">Turkish Angora</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Notes:</span>
+                                <textarea name="addNewCatNotes" id="addNewCatNotes" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-sm-12 p-4 m-2 border-secondary-subtle  border rounded-2">
+                        <strong>Health info:</strong>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Spayed/Neutered</span>
+                                <select name="addNewCatSpayedNeutered" id="addNewCatSpayedNeutered" class="form-select" required>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Unknown">Unknown</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Shots Status</span>
+                                <select name="addNewCatShotStatus" id="addNewCatShotStatus" class="form-select" required>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Unknown">Unknown</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text">Weight</span>
+                                <input type="number" name="addNewCatWeight" id="addNewCatWeight" class="form-control" required>
+                                <span class="input-group-text">lbs</span>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text">Taken On</span>
+                                    <input type="text" name="addNewCatWeightTakenOn" value="" placeholder="mm/dd/yyyy" id="addNewCatWeightTakenOn" class="form-control" disabled>    
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text">On Medication?</span>
+                                    <select name="addNewCatMedicationStat" id="addNewCatMedicationStat" class="form-select" required>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div> 
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text">Medical Notes:</span>
+                                    <textarea name="addNewCatMedicalNotes" id="addNewCatMedicalNotes" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 p-4 m-2 border-secondary-subtle  border rounded-2">
+                        <a class="btn btn-primary w-100 p-5 my-4 role="button"  id="saveNewCatBtn">Save New Cat</a>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+        
+      </div>
+      <div class="page p-3 rounded-3" id="healthTracker">
+        <h2>Tracking: ${catName}</h2>
+        <strong>page#healthTracker</strong>
+        <p>This page will contain health data for medicinal purposes (mostly to calculate dosage)</p>
+        <div class="row">
+          <div class="col">
+            <table class="table">
+              <thead>
+                <th>#</th>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Change</th>
+              </thead>
+              <tbody>
+                <td>1</td>
+                <td>2023-10-17</td>
+                <td>12.5</td>
+                <td>--</td>
+              </tbody>
+            </table>
+            <div class="container">
+              <button class="btn btn-primary ">Record Weight</button>
+            </div>
+          </div>
+          <div class="col">
+            medication section here
+          </div>
+        </div> 
+        <div class="healthTracker-${catName}" id="healthtracker-catid-${catId}">
+          
+        </div>
+      </div>
+      <div class="page p-3 rounded-3" id="editCatsWrapper">
+        <strong>Edit Cat: {cat name}</strong>
+        
+      </div>
+      <div class="page p-3 rounded-3" id="about">
+        <h2 class="h-3 display-4">About Foster Cats Logger</h2>
+        <strong class="h4">A fun project to track foster cats weight and health changes / progress</strong>
+        <p class="lead my-4">Every cat deserves a chance to be loved, nurtured, and cared for, regardless of their circumstances.</p>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/addCat.js"></script>
+    <script src="./js/loadCats.js"></script>
+    <script src="./js/tracker.js"></script>
+    <!-- <script src="./js/editCat.js"></script> -->
+  </body>
+</html>
