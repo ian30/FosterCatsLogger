@@ -93,20 +93,19 @@ saveNewCatBtn.addEventListener('click', () => {
         cats.push(newCat);
         localStorage.setItem('cats', JSON.stringify(cats));
     }
-    //debug: 
-    // console.log(
-    //     'cat name: ' + newCatName + "\n",
-    //     'cat breed: ' + newCatBreed + "\n",
-    //     'cat dob: ' + newCatDOB + "\n",
-    //     'cat age: ' + calcNewCatAge(newCatDOB) + "\n",
-    //     'cat gender: ' + newCatGender + "\n",
-    //     'cat weight: ' + newCatWeight + " lbs" + "\n",
-    //     'taken on: ' + formattedDate + "\n",
-    //     'Spayed/Neutered: ' + newCatSpayStatus + "\n",
-    //     'Shots Status: ' + newCatShotStatus + "\n",
-    //     'medications?' + medicationStat + "\n",
-    //     'Notes: ' + addNewCatGenericNotes + "\n",
-    //     'Medical Notes: ' + addNewCatMedicalNotes
-    // );
+
+    // reset all form inputs:
+    document.getElementById('addNewCatName').value = '';
+    document.getElementById('addNewCatDOB').value = '';
+    document.getElementById('addNewCatGender').value = '';
+    document.getElementById('addNewCatBreed').value = '';
+    document.getElementById('addNewCatSpayedNeutered').value = '';
+    document.getElementById('addNewCatShotStatus').value = '';
+    document.getElementById('addNewCatWeight').value = '';
+    document.getElementById('addNewCatWeightTakenOn').value = '';
+    document.getElementById('addNewCatNotes').value = '';
+    document.getElementById('addNewCatMedicalNotes').value = '';
+    document.getElementById('addNewCatMedicationStat').value = '';
+
     location.reload();
 })

@@ -482,7 +482,7 @@ if (!catsData) {
                 <td>${recordIndex}</td>
                 <td>${record.takenOn}</td>
                 <td>${record.weight}</td>
-                <td>${record.weight - weightTracker[recordIndex - 1].weight}</td>
+                <td></td>
             </tr>
         `;
         //generate all the rows!!!!!!!
@@ -506,12 +506,12 @@ if (!catsData) {
                             <th>Change</th>
                         </thead>
                         <tbody id="weightRecordsTableBody-catId-${i}">
-                            <tr>
+                            <!-- <tr>
                                 <td>${i}</td>
                                 <td>${cat.weightTakenOn}</td>
                                 <td>${cat.weight}</td>
                                 <td>--</td>
-                            </tr>
+                            </tr> -->
                             ${rowsHTML}<!-- HERE -->
                         </tbody>
                      </table>
