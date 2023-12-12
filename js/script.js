@@ -13,14 +13,13 @@ const aboutButton = document.getElementById('aboutBtn');
 aboutButton.addEventListener('click', () => {
     aboutPageEl.classList.toggle('hidden');
     aboutPageEl.classList.toggle('active');
-})
+});
 //adding cat: 
 const addCatButton = document.getElementById('addNewCat');
 addCatButton.addEventListener('click', () => {
     addNewCatPageEl.classList.toggle('hidden');
     addNewCatPageEl.classList.toggle('active');
-})
-
+});
 function deleteCat(index) {
     if (!confirm("Do you want to delete the cat? (this cannot be undone)")) {
         return;
@@ -31,12 +30,8 @@ function deleteCat(index) {
         localStorage.setItem('cats', JSON.stringify(catCollectionStorage));
         location.reload();
     }
-
 }
 function alertVal() {
     var inputVal = document.getElementById('catName').value;
     alert(inputVal);
 }
-
-// temporary removing hidden class from the wrapper of cats edit page:
-//editCatWrapperEl.classList.remove('hidden');

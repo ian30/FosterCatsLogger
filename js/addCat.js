@@ -88,13 +88,11 @@ saveNewCatBtn.addEventListener('click', () => {
             },
             medicalnotes: addNewCatMedicalNotes
         };
-
         // Save to localStorage
         const cats = JSON.parse(localStorage.getItem('cats')) || [];
         cats.push(newCat);
         localStorage.setItem('cats', JSON.stringify(cats));
     }
-
     //debug: 
     // console.log(
     //     'cat name: ' + newCatName + "\n",
