@@ -482,7 +482,7 @@ if (!catsData) {
                 <td>${recordIndex}</td>
                 <td>${record.takenOn}</td>
                 <td>${record.weight}</td>
-                <td></td>
+                <td> -- </td>
             </tr>
         `;
         //generate all the rows!!!!!!!
@@ -575,7 +575,7 @@ if (!catsData) {
             idCell.textContent = weightRecord.id;
             dateCell.textContent = weightRecord.takenOn;
             weightCell.textContent = weightRecord.weight;
-            changeCell.innerHTML = `TODO`;
+            changeCell.innerHTML = ` -- `;
         }
         //save weight record:
         const saveWeightRecordBtn = document.getElementById(`saveWeightRecord-catId-${i}`);
