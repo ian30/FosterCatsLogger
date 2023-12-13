@@ -314,7 +314,6 @@ if (!catsData) {
     })
 }
 
-
 function editCat(catId) {
     //showing details for the cat user clicked on:
     let currentCatEditContainer = document.getElementById(`editCatId-${catId}`);
@@ -447,23 +446,6 @@ function idRowCounter() {
         console.log('i: ', i)
     }
 }
-
-function testMe() {
-    if (!catsData) {
-        console.log('no cats found in localStorage');
-    } else {
-        catsData.forEach((cat, i) => {
-            let weightTracker = cat.weightTracker;
-            for (let recordKey in weightTracker) {
-                console.log(
-                    'weight: ', weightTracker[recordKey].weight,
-                    'date: ', weightTracker[recordKey].takenOn
-                )
-            }
-        })
-    }
-}
-//inject a <tr> and the <td> with the weight and date, compare latest weight taken to the one currently recorded and show the change
 const healthTrackerPageEl = document.getElementById('healthTracker');
 healthTrackerPageEl.innerHTML = '';
 if (!catsData) {
@@ -471,25 +453,20 @@ if (!catsData) {
 } else {
     catsData.forEach((cat, i) => {
         let weightTracker = cat.weightTracker;
-        for (let recordKey in weightTracker) {
-            console.log(recordKey, ' ',
-                'weight: ', weightTracker[recordKey].weight,
-                'date: ', weightTracker[recordKey].takenOn
-            )
-        }
         const createWeightRecordRow = (record, recordIndex) => `
             <tr>
-                <td>${recordIndex}</td>
+                <td><strong>${recordIndex}</strong></td>
                 <td>${record.takenOn}</td>
-                <td>${record.weight}</td>
-                <td> -- </td>
+                <td class="recordedWeight-${i}">${record.weight}</td>
+                <td class="weightChangeCell-${i}"></td>
             </tr>
         `;
-        //generate all the rows!!!!!!!
+        //generate all the rows!!!
         let rowsHTML = '';
         Object.keys(weightTracker).forEach((recordKey, Index) => {
             rowsHTML += createWeightRecordRow(weightTracker[recordKey], Index);
         })
+
         let parentDiv = document.createElement('div');
         parentDiv.classList.add(`healthTrackerForCatId-${i}`, 'hidden');
         parentDiv.setAttribute('id', 'healthTrackerForCatId-' + i);
@@ -506,13 +483,7 @@ if (!catsData) {
                             <th>Change</th>
                         </thead>
                         <tbody id="weightRecordsTableBody-catId-${i}">
-                            <!-- <tr>
-                                <td>${i}</td>
-                                <td>${cat.weightTakenOn}</td>
-                                <td>${cat.weight}</td>
-                                <td>--</td>
-                            </tr> -->
-                            ${rowsHTML}<!-- HERE -->
+                            ${rowsHTML}
                         </tbody>
                      </table>
                      <!-- <button class="btn btn-primary" id="addWeightRecordBtn-${i}">Add Weight</button> -->
@@ -538,7 +509,7 @@ if (!catsData) {
                      </div>
                 </div>
                 <div class="col">
-                    <p>Medication Tracking for <strong>${cat.name} </strong> <button class="float-end btn btn-sm btn-primary" id="addMedicationBtn-${i}">Add New Medication</button></p>
+                    <p>Meds Tracking for <strong>${cat.name} </strong> <button class="float-end btn btn-sm btn-primary" id="addMedicationBtn-${i}">Add New Medication</button></p>
                     <hr />
                 </div>
             </div>
@@ -555,16 +526,25 @@ if (!catsData) {
             let sibling = showWeightTrackerBtn.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
             sibling.classList.toggle('active');
         });
+        let weightValues = document.getElementsByClassName(`recordedWeight-${i}`);
+
+        let initWeight = weightTracker[Object.keys(weightTracker)[0]].weight;
+        let changeTableCell = document.getElementsByClassName(`weightChangeCell-${i}`);
+        for (let i = 0; i < changeTableCell.length; i++) {
+            let weightDifference = weightValues[i].textContent - initWeight;
+            weightDifference = weightDifference.toFixed(2);
+            if (weightDifference <= 0) weightDifference = '--'
+            changeTableCell[i].textContent = weightDifference;
+        }
         function closeAddWeightRecordPopup(i) {
             let sibling = showWeightTrackerBtn.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
             sibling.classList.remove('active');
         }
         //taking weight and date:
-
         function addWeightRecordToTable(catId, weightRecord) {
             // Find the table by its ID
             let table = document.getElementById(`weightRecordsTable-catId-${catId}`);
-            // Create a new row
+            // Create new row
             let row = table.insertRow();
             // Create two cells for weight and date
             let idCell = row.insertCell();
@@ -575,7 +555,7 @@ if (!catsData) {
             idCell.textContent = weightRecord.id;
             dateCell.textContent = weightRecord.takenOn;
             weightCell.textContent = weightRecord.weight;
-            changeCell.innerHTML = ` -- `;
+            //changeCell.innerHTML = ` -- `;
         }
         //save weight record:
         const saveWeightRecordBtn = document.getElementById(`saveWeightRecord-catId-${i}`);
@@ -597,7 +577,6 @@ if (!catsData) {
                 };
                 // Update cats data in localStorage
                 localStorage.setItem('cats', JSON.stringify(catsData));
-                console.log('Updated cat: ', cat);
                 if (cat && cat.weightTracker) {
                     // Assuming the latest record is the last one added
                     let latestRecordKey = Object.keys(cat.weightTracker).pop();
@@ -619,7 +598,6 @@ if (!catsData) {
 //showing healthTracker:
 function showHealthTracker(catId) {
     let currentCatHealthTrackerContainer = document.getElementById(`healthTrackerForCatId-${catId}`);
-    console.log('currentCatHealthTrackerContainer: ', currentCatHealthTrackerContainer);
     healthTrackerPageEl.classList.remove('hidden');
     currentCatHealthTrackerContainer.classList.remove('hidden');
 }
