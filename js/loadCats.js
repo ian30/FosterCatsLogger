@@ -16,7 +16,7 @@ function calcNewCatAge(newCatDOB) {
     remainingDays = remainingDays % oneMonth;
     let weeks = Math.floor(remainingDays / 7);
     let days = remainingDays % 7;
-    // Construct the age string
+    // Construct age string
     let newCatAge = '';
     if (years > 0) newCatAge += `${years} yrs `;
     if (months > 0) newCatAge += `${months} mon `;
@@ -39,16 +39,11 @@ if (!catsData) {
         nameCell.textContent = cat.name;
         row.appendChild(nameCell);
 
-        // let dobCell = document.createElement('td');
-        // dobCell.textContent = cat.dob;
-        // row.appendChild(dobCell);
-
         let genderCell = document.createElement('td');
         genderCell.textContent = cat.gender;
         row.appendChild(genderCell);
 
         let ageCell = document.createElement('td');
-        //ageCell.textContent = cat.age;
         ageCell.textContent = calcNewCatAge(cat.dob);
         row.appendChild(ageCell);
 
@@ -116,8 +111,6 @@ if (!catsData) {
         let spayStatus = cat.spayStatus;
         let weight = cat.weight;
         let weightTakenOn = cat.weightTakenOn;
-        let weightRecord = cat.weightTracker.record;
-
         //creating edit element for each cat:
         let parentDiv = document.createElement('div');
         parentDiv.setAttribute('id', `editCatId-${i}`)
@@ -310,10 +303,8 @@ if (!catsData) {
         </div>
         `
         catsEditContainer.appendChild(parentDiv);
-
     })
 }
-
 function editCat(catId) {
     //showing details for the cat user clicked on:
     let currentCatEditContainer = document.getElementById(`editCatId-${catId}`);
@@ -465,9 +456,12 @@ if (!catsData) {
         let rowsHTML = '';
         Object.keys(weightTracker).forEach((recordKey, Index) => {
             rowsHTML += createWeightRecordRow(weightTracker[recordKey], Index);
-        })
-
+        });
+        let keys = Object.keys(weightTracker);
+        let lastKey = keys[keys.length - 1];
+        let latestWeight = weightTracker[lastKey].weight;
         let parentDiv = document.createElement('div');
+
         parentDiv.classList.add(`healthTrackerForCatId-${i}`, 'hidden');
         parentDiv.setAttribute('id', 'healthTrackerForCatId-' + i);
         parentDiv.innerHTML = `
@@ -501,16 +495,66 @@ if (!catsData) {
                                     </div>
                                     <div class="text-center btn-group w-100 mt-2 p-3" role="group">
                                         <button type="button" class="btn btn-primary btn-lg" id="saveWeightRecord-catId-${i}" >Save</button>
-                                        <button type="button" class="btn btn-secondary btn-lg cancelWeightRecord-${i}">Cancel</button>
+                                        <button type="button" class="btn btn-secondary btn-lg cancelHealthTrackerRec cancelWeightRecord-${i}">Cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                      </div>
                 </div>
-                <div class="col">
-                    <p>Meds Tracking for <strong>${cat.name} </strong> <button class="float-end btn btn-sm btn-primary" id="addMedicationBtn-${i}">Add New Medication</button></p>
+                <div class="col position-relative ">
+                    <p>Meds Tracking for <strong>${cat.name} </strong> <button class="float-end btn btn-sm btn-primary" id="addMedicationBtn-${i}">Add Medication</button></p>
                     <hr />
+                    <div class="medRecordEntries">
+                        <div class="row">
+                            <div class="col">
+                                <table class="table healthTrackerMedRecTable" id="medicationRecordsTable-catId-${i}">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Medication</th>
+                                        <th>Dosage</th>
+                                        <th>Date</th>
+                                    </thead>
+                                    <tbody id="medicationRecordsTableBody-catId-${i}">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="addMedication" id="addMedication-catId-${i}">
+                        <form action="#"1 method="POST" name="addMedicationForm">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text ">Medication</span>
+                                        <input type="text" class="form-control" id="addMedication-medication-catId-${i}" name="addMedication-medication-catId-${i}">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text ">Current Weight:</span>
+                                        <input type="text" class="form-control " name="currentWeight-catId-${i}" id="currentWeight-catId-${i}" value="${latestWeight}" disabled/>
+                                        <span class="input-group-text ">lbs</span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text ">Ratio</span>
+                                        <input type="text" class="form-control" id="addMedication-ratio-catId-${i}" name="addMedication-ratio-catId-${i}">
+                                        <span class="input-group-text ">Give:</span>
+                                        <input type="text" class="form-control" disabled id="addMedication-giveCat-catId-${i}" name="addMedication-giveCat-catId-${i}" value="">
+                                        <span class="input-group-text ">ml</span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text ">Date</span>
+                                        <input type="date" class="form-control" id="addMedication-date-catId-${i}" name="addMedication-date-catId-${i}">
+                                    </div>
+                                    <div class="text-center btn-group w-100 mt-2 p-3" role="group">
+                                        <button type="button" class="btn btn-primary btn-lg" id="saveMedication-catId-${i}" >Save</button>
+                                        <button type="button" class="btn btn-secondary btn-lg cancelHealthTrackerRec">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -518,8 +562,25 @@ if (!catsData) {
                     <button class="btn btn-secondary" id="closeHealthTracker-${i}" onclick="closeHealthTracker(${i})">Close Health Tracker</button>
                 </div>
             </div>
-        `
+        `;
+
         healthTrackerPageEl.appendChild(parentDiv);
+        //adding medication:
+        const showMedicationBtn = document.getElementById(`addMedicationBtn-${i}`);
+        showMedicationBtn.addEventListener('click', () => {
+            let sibling = showMedicationBtn.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
+            sibling.classList.toggle('active');
+        })
+        //calculating dosage by latest weight record:
+        let ratioValueEl = document.getElementById(`addMedication-ratio-catId-${i}`);
+        let ratioValue = ratioValueEl.value;
+        ratioValueEl.addEventListener('change', () => {
+            ratioValue = ratioValueEl.value;
+            let giveValueEl = document.getElementById(`addMedication-giveCat-catId-${i}`);
+            let giveDosage = ratioValue * latestWeight;
+            giveDosage = giveDosage.toFixed(1);
+            giveValueEl.value = giveDosage;
+        })
         //adding weight record:
         const showWeightTrackerBtn = document.getElementById(`addWeightRecordBtn-${i}`);
         showWeightTrackerBtn.addEventListener('click', () => {
@@ -542,16 +603,13 @@ if (!catsData) {
         }
         //taking weight and date:
         function addWeightRecordToTable(catId, weightRecord) {
-            // Find the table by its ID
             let table = document.getElementById(`weightRecordsTable-catId-${catId}`);
-            // Create new row
             let row = table.insertRow();
-            // Create two cells for weight and date
             let idCell = row.insertCell();
             let dateCell = row.insertCell();
             let weightCell = row.insertCell();
             let changeCell = row.insertCell();
-            // Add the text to the cells
+
             idCell.textContent = weightRecord.id;
             dateCell.textContent = weightRecord.takenOn;
             weightCell.textContent = weightRecord.weight;
@@ -588,6 +646,11 @@ if (!catsData) {
             }
         });
         //cancel:
+        const cancelMedRecordBtn = document.querySelector(`.cancelMedication-${i}`);
+        cancelMedRecordBtn.addEventListener('click', () => {
+            let sibling = cancelMedRecordBtn.parentElement.parentElement.parentElement.parentElement.parentElement;
+            sibling.classList.remove('active');
+        })
         const cancelWeightRecordBtn = document.querySelector(`.cancelWeightRecord-${i}`);
         cancelWeightRecordBtn.addEventListener('click', () => {
             let sibling = cancelWeightRecordBtn.parentElement.parentElement.parentElement.parentElement.parentElement;

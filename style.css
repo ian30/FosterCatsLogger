@@ -63,7 +63,8 @@
 .edit-catGender-list,
 .edit-CatShotsStat,
 .edit-catName,
-.addWeightRecord {
+.addWeightRecord,
+.addMedication {
   transition: all 400ms ease-in-out;
   height: 0px;
   overflow: hidden;
@@ -74,7 +75,8 @@
 .edit-catGender-list.active,
 .edit-CatShotsStat.active,
 .edit-catName.active,
-.addWeightRecord.active {
+.addWeightRecord.active,
+.addMedication.active {
   min-height: 168px;
   position: absolute;
   width: 100%;
@@ -87,7 +89,9 @@
 .addWeightRecord.active {
   min-height: 233px;
 }
-
+.addMedication.active {
+  min-height: 345px;
+}
 .healthTrackerWeightRecTable tbody tr:first-child td {
   background-color: #dcebf0;
 }
