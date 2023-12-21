@@ -15,37 +15,22 @@
   <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container">
-        <a class="navbar-brand" title="logo" href="#"
-          ><img src="/images/cat.png" width="50" alt=""
-        /></a>
+        <a class="navbar-brand" title="logo" href="#"><img src="/images/cat.png" width="50" alt="" /></a>
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary" id="addNewCat">
-            Add Cat
-          </button>
+          <button type="button" class="btn btn-secondary" id="addNewCat">Add Cat</button>
 
-          <button type="button" class="btn btn-secondary" id="aboutBtn">
-            About
-          </button>
+          <button type="button" class="btn btn-secondary" id="aboutBtn">About</button>
           <!-- <button type="button" class="btn btn-secondary" id="test" onclick="testMe()">Test</button> -->
         </div>
         <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </nav>
     <div class="container">
       <h1>Hello, Maria!</h1>
-      <p>
-        This app is very easy to use, just click <kbd>Add Cat</kbd> to, fill in
-        the deets and you're good to go with weight tracking and medication
-        dosing.
-      </p>
+      <p>This app is very easy to use, just click <kbd>Add Cat</kbd> to, fill in the deets and you're good to go with weight tracking and medication dosing.</p>
     </div>
     <div class="container pagesContainer d-sm-none d-md-block d-lg-block">
       <div class="page p-3 firstPage" id="catsTable">
@@ -64,50 +49,26 @@
       </div>
       <div class="page p-3 rounded-3" id="addNewCatForm">
         <div id="addCatFormWrapper">
-          <form
-            action="addCat.js"
-            method="post"
-            id="addCatForm"
-            class="needs-validation"
-          >
-            <div class="row">
-              <div
-                class="col-md-4 col-sm-12 p-4 m-2 border-secondary-subtle border rounded-2"
-              >
+          <form action="addCat.js" method="post" id="addCatForm" class="needs-validation">
+            <div class="row p-2">
+              <div class="col-md-6 col-sm-12 p-4 border-secondary-subtle border rounded-2">
                 <strong>General Info:</strong>
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Name</span>
-                    <input
-                      type="text"
-                      name="addNewCatName"
-                      id="addNewCatName"
-                      class="form-control"
-                      required
-                    />
+                    <input type="text" name="addNewCatName" id="addNewCatName" class="form-control" required />
                   </div>
                 </div>
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Date of Birth</span>
-                    <input
-                      type="date"
-                      name="addNewCatDOB"
-                      id="addNewCatDOB"
-                      class="form-control"
-                      required
-                    />
+                    <input type="date" name="addNewCatDOB" id="addNewCatDOB" class="form-control" required />
                   </div>
                 </div>
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Gender</span>
-                    <select
-                      name="addNewCatGender"
-                      id="addNewCatGender"
-                      class="form-select"
-                      required
-                    >
+                    <select name="addNewCatGender" id="addNewCatGender" class="form-select" required>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
@@ -116,29 +77,15 @@
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Age </span>
-                    <input
-                      type="text"
-                      name="addNewCatAge"
-                      placeholder="(calculated automatically)"
-                      id="addNewCatAge"
-                      class="form-control"
-                      disabled
-                    />
+                    <input type="text" name="addNewCatAge" placeholder="(calculated automatically)" id="addNewCatAge" class="form-control" disabled />
                   </div>
                 </div>
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Breed</span>
-                    <select
-                      name="addNewCatBreed"
-                      id="addNewCatBreed"
-                      class="form-select"
-                      required
-                    >
+                    <select name="addNewCatBreed" id="addNewCatBreed" class="form-select" required>
                       <option value="Tabby">Tabby</option>
-                      <option value="American Shorthair">
-                        American Shorthair
-                      </option>
+                      <option value="American Shorthair">American Shorthair</option>
                       <option value="Maine Coon">Maine Coon</option>
                       <option value="Persian">Persian</option>
                       <option value="Ragdoll">Ragdoll</option>
@@ -157,85 +104,96 @@
                 </div>
                 <div class="form-group mb-4">
                   <div class="input-group">
+                    <span class="input-group-text">Chipped?</span>
+                    <select name="isCatChipped" id="isCatChipped" class="form-select">
+                      <option value="Yes">Yes</option>
+                      <option value="No" selected>No</option>
+                      <option value="Unknown">Unknown</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group mb-4 hidden">
+                  <div class="input-group">
+                    <span class="input-group-text">Chip #:</span>
+                    <input type="num" min="0" name="addNewCatChipNumber" id="addNewCatChipNumber" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <div class="input-group">
                     <span class="input-group-text">Notes:</span>
-                    <textarea
-                      name="addNewCatNotes"
-                      id="addNewCatNotes"
-                      class="form-control"
-                      rows="3"
-                    ></textarea>
+                    <textarea name="addNewCatNotes" id="addNewCatNotes" class="form-control" rows="3"></textarea>
                   </div>
                 </div>
               </div>
-              <div
-                class="col-md-4 col-sm-12 p-4 m-2 border-secondary-subtle border rounded-2"
-              >
+              <div class="col-md-6 col-sm-12 p-4 border-secondary-subtle border rounded-2">
                 <strong>Health info:</strong>
                 <div class="form-group mb-4">
                   <div class="input-group">
-                    <span class="input-group-text">Spayed/Neutered</span>
-                    <select
-                      name="addNewCatSpayedNeutered"
-                      id="addNewCatSpayedNeutered"
-                      class="form-select"
-                      required
-                    >
+                    <span class="input-group-text">Fixed?</span>
+                    <select name="addNewCatSpayedNeutered" id="addNewCatSpayedNeutered" class="form-select" required>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                       <option value="Unknown">Unknown</option>
                     </select>
                   </div>
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-2">
                   <div class="input-group">
-                    <span class="input-group-text">Shots Status</span>
-                    <select
-                      name="addNewCatShotStatus"
-                      id="addNewCatShotStatus"
-                      class="form-select"
-                      required
-                    >
+                    <span class="input-group-text">Shots?</span>
+                    <select name="addNewCatShotStatus" id="addNewCatShotStatus" class="form-select" required>
                       <option value="Yes">Yes</option>
-                      <option value="No">No</option>
+                      <option value="No" selected>No</option>
                       <option value="Unknown">Unknown</option>
                     </select>
                   </div>
                 </div>
+
+                <div class="form-group mb-2 hidden">
+                  <span class="badge rounded-2 text-bg-warning rounded-bottom-0">1st Shot:</span>
+                  <span id="addNewCatShowSecondShotDate" class="badge rounded-2 btn btn-primary float-end">Add 2nd Shot</span>
+                  <div class="input-group">
+                    <span class="input-group-text">Taken On:</span>
+                    <input type="date" name="addNewCatFirstShotsTakenOn" id="addNewCatFirstShotsTakenOn" class="form-control" />
+                  </div>
+                </div>
+
+                <!-- 2nd shot markup -->
+                <div class="form-group mb-2 hidden">
+                  <span class="badge rounded-2 text-bg-primary rounded-bottom-0">2nd Shot:</span>
+                  <span id="addNewCatShowRabiesShotDate" class="badge rounded-2 btn btn-danger float-end">Add Rabies Shot</span>
+                  <div class="input-group">
+                    <span class="input-group-text">Taken On:</span>
+                    <input type="date" name="addNewCatSecondShotsTakenOn" id="addNewCatSecondShotsTakenOn" class="form-control" />
+                  </div>
+                </div>
+
+                <!-- Rabies markup -->
+                <div class="form-group mb-4 hidden">
+                  <span class="badge rounded-2 text-bg-danger rounded-bottom-0">Rabies Shot:</span>
+                  <div class="input-group">
+                    <span class="input-group-text">Taken On:</span>
+                    <input type="date" name="addNewCatRabiesShotsTakenOn" id="addNewCatRabiesShotsTakenOn" class="form-control" />
+                  </div>
+                </div>
+
                 <div class="form-group mb-4">
                   <div class="input-group">
                     <span class="input-group-text">Weight</span>
-                    <input
-                      type="number"
-                      name="addNewCatWeight"
-                      id="addNewCatWeight"
-                      class="form-control"
-                      required
-                    />
+                    <input type="number" name="addNewCatWeight" id="addNewCatWeight" class="form-control" required />
                     <span class="input-group-text">lbs</span>
                   </div>
                   <div class="form-group mb-4">
                     <div class="input-group">
                       <span class="input-group-text">Taken On</span>
-                      <input
-                        type="text"
-                        name="addNewCatWeightTakenOn"
-                        value=""
-                        placeholder="mm/dd/yyyy"
-                        id="addNewCatWeightTakenOn"
-                        class="form-control"
-                        disabled
-                      />
+                      <input type="text" name="addNewCatWeightTakenOn" value="" placeholder="mm/dd/yyyy" id="addNewCatWeightTakenOn" class="form-control" disabled />
                     </div>
                   </div>
                   <div class="form-group mb-4">
                     <div class="input-group">
                       <span class="input-group-text">On Medication?</span>
-                      <select
-                        name="addNewCatMedicationStat"
-                        id="addNewCatMedicationStat"
-                        class="form-select"
-                        required
-                      >
+                      <select name="addNewCatMedicationStat" id="addNewCatMedicationStat" class="form-select" required>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                       </select>
@@ -244,28 +202,18 @@
                   <div class="form-group mb-4">
                     <div class="input-group">
                       <span class="input-group-text">Medical Notes:</span>
-                      <textarea
-                        name="addNewCatMedicalNotes"
-                        id="addNewCatMedicalNotes"
-                        class="form-control"
-                        rows="3"
-                      ></textarea>
+                      <textarea name="addNewCatMedicalNotes" id="addNewCatMedicalNotes" class="form-control" rows="3"></textarea>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="col-md-3 col-sm-12 p-4 m-2 border-secondary-subtle border rounded-2"
-              >
-                <a
-                  class="btn btn-primary w-100 p-3 mb-2"
-                  role="button"
-                  id="saveNewCatBtn"
-                  >Save New Cat</a
-                >
-                <a class="btn btn-secondary w-100 p-3" role="button" href="#"
-                  >Cancel</a
-                >
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <a class="btn btn-primary w-100 p-3 mb-2" role="button" id="saveNewCatBtn">Save New Cat</a>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <a class="btn btn-secondary w-100 p-3" role="button" href="#">Cancel</a>
               </div>
             </div>
           </form>
@@ -273,22 +221,13 @@
       </div>
       <div class="page p-3 rounded-3" id="healthTracker">
         <h2>Tracking: ${catName}</h2>
-        <p>
-          This page will contain health data for medicinal purposes (mostly to
-          calculate dosage)
-        </p>
+        <p>This page will contain health data for medicinal purposes (mostly to calculate dosage)</p>
       </div>
       <div class="page p-3 rounded-3" id="editCatsWrapper"></div>
       <div class="page p-3 rounded-3" id="about">
         <h2 class="h-3 display-4">About Foster Cats Logger</h2>
-        <strong class="h4"
-          >A fun project to track foster cats weight and health changes /
-          progress</strong
-        >
-        <p class="lead my-4">
-          Every cat deserves a chance to be loved, nurtured, and cared for,
-          regardless of their circumstances.
-        </p>
+        <strong class="h4">A fun project to track foster cats weight and health changes / progress</strong>
+        <p class="lead my-4">Every cat deserves a chance to be loved, nurtured, and cared for, regardless of their circumstances.</p>
       </div>
     </div>
 

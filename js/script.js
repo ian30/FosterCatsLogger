@@ -4,18 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
             "id": 0,
             "name": "Whiskers",
             "breed": "Siamese",
+            "chipped": "Yes",
+            "chip_number": "65468765435254968",
             "dob": "2020-01-01",
-            "age": 3,
+            "age": "3 yrs 11 mon 3 wks 1 days",
             "gender": "Male",
-            "weight": "10 lbs",
+            "weight": 10,
             "weightTakenOn": "2023-01-10",
             "weightTracker": {
-                "record0": { "id": 0, "weight": 8, "takenOn": "2021-07-01" },
-                "record1": { "id": 1, "weight": 9, "takenOn": "2022-01-01" },
-                "record2": { "id": 2, "weight": 10, "takenOn": "2023-01-10" }
+                "record0": { "id": 0, "weight": 5.3, "takenOn": "2021-07-01" },
+                "record1": { "id": 1, "weight": 8.1, "takenOn": "2022-01-01" },
+                "record2": { "id": 2, "weight": 10.5, "takenOn": "2023-01-10" }
             },
             "spayStatus": "Spayed",
-            "shotStatus": "Up-to-date",
+            "shotStatus": "Yes",
+            "firstShotsDate": "2021-07-01",
+            "secondShotsDate": "2022-01-01",
+            "rabiesShotsDate": "2023-01-10",
             "genericNotes": "Very playful and loves to nap in the sun.",
             "medicationStat": "None",
             "medicationTracker": {},
@@ -25,10 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "id": 1,
             "name": "Mittens",
             "breed": "Maine Coon",
+            "chipped": "No",
+            "chip_number": "",
             "dob": "2019-05-15",
-            "age": 4,
+            "age": "4 yrs 7 mon 1 wks 1 days",
             "gender": "Female",
-            "weight": "12 lbs",
+            "weight": 12,
             "weightTakenOn": "2023-02-20",
             "weightTracker": {
                 "record0": { "id": 0, "weight": 10, "takenOn": "2021-08-15" },
@@ -36,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 "record2": { "id": 2, "weight": 12, "takenOn": "2023-02-20" }
             },
             "spayStatus": "Spayed",
-            "shotStatus": "Up-to-date",
+            "shotStatus": "Yes",
+            "firstShotsDate": "2021-07-01",
+            "secondShotsDate": "2022-01-01",
+            "rabiesShotsDate": "2023-01-10",
             "genericNotes": "Loves attention and is very vocal.",
             "medicationStat": "None",
             "medicationTracker": {},
@@ -46,10 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "id": 2,
             "name": "Shadow",
             "breed": "British Shorthair",
+            "chipped": "Yes",
+            "chip_number": "43534532396786456",
             "dob": "2018-10-30",
-            "age": 5,
+            "age": "5 yrs 1 mon 2 wks 6 days",
             "gender": "Male",
-            "weight": "11 lbs",
+            "weight": 11,
             "weightTakenOn": "2023-03-05",
             "weightTracker": {
                 "record0": { "id": 0, "weight": 9, "takenOn": "2021-09-10" },
@@ -57,7 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 "record2": { "id": 2, "weight": 11, "takenOn": "2023-03-05" }
             },
             "spayStatus": "Neutered",
-            "shotStatus": "Up-to-date",
+            "shotStatus": "Yes",
+            "firstShotsDate": "2021-07-01",
+            "secondShotsDate": "2022-01-01",
+            "rabiesShotsDate": "2023-01-10",
             "genericNotes": "A bit shy but very affectionate once comfortable.",
             "medicationStat": "None",
             "medicationTracker": {},
@@ -105,6 +120,51 @@ function deleteCat(index) {
         location.reload();
     }
 }
+//is cat chipped?
+function isCatChipped() {
+    let isCatChipped = document.getElementById('isCatChipped').value;
+    return isCatChipped === 'Yes';
+}
+const isCatChippedElement = document.getElementById('isCatChipped');
+isCatChippedElement.addEventListener('change', () => {
+    const parentEl = isCatChippedElement.parentNode.parentElement.nextElementSibling;
+    isCatChipped = isCatChippedElement.value;
+    if (isCatChipped === 'Yes') {
+        //get chip #:
+        let chipNum = document.getElementById('addNewCatChipNumber').value;
+        parentEl.classList.remove('hidden');
+    } else if (isCatChipped === 'No') {
+        parentEl.classList.add('hidden');
+    } else {
+        if (parentEl.classList.contains('hidden')) {
+            isCatChipped = 'Unknown';
+            console.log('unknown? ', isCatChipped)
+        }
+    }
+})
+// shots? 
+const isCatShotsElement = document.getElementById('addNewCatShotStatus');
+isCatShotsElement.addEventListener('change', () => {
+    const parentEl = isCatShotsElement.parentNode.parentElement.nextElementSibling;
+    isCatShots = isCatShotsElement.value;
+    if (isCatShots === 'Yes') {
+        parentEl.classList.remove('hidden');
+    } else if (isCatShots === 'No') {
+        parentEl.classList.add('hidden');
+    }
+})
+//2nd shot?
+const isCat2ndShotElement = document.getElementById('addNewCatShowSecondShotDate');
+isCat2ndShotElement.addEventListener('click', () => {
+    const targetEl = isCat2ndShotElement.parentNode.nextElementSibling;
+    targetEl.classList.toggle('hidden');
+})
+//rabies shot?
+const isCatRabiesShotElement = document.getElementById('addNewCatShowRabiesShotDate');
+isCatRabiesShotElement.addEventListener('click', () => {
+    const targetEl = isCatRabiesShotElement.parentNode.nextElementSibling;
+    targetEl.classList.toggle('hidden');
+})
 function alertVal() {
     var inputVal = document.getElementById('catName').value;
     alert(inputVal);

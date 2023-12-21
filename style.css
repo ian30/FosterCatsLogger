@@ -1,3 +1,7 @@
+*,
+html {
+  box-sizing: border-box;
+}
 .page:not(:first-child) {
   min-height: 50vh;
   /* border: 4px solid green; */

@@ -111,6 +111,9 @@ if (!catsData) {
         let spayStatus = cat.spayStatus;
         let weight = cat.weight;
         let weightTakenOn = cat.weightTakenOn;
+        let firstShotsTakenOn = cat.firstShotsDate;
+        let secondShotsTakenOn = cat.rabiesShotsDate;
+        let rabiesShotsTakenOn = cat.secondShotsDate;
         //creating edit element for each cat:
         let parentDiv = document.createElement('div');
         parentDiv.setAttribute('id', `editCatId-${i}`)
@@ -199,6 +202,13 @@ if (!catsData) {
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group mb-4 position-relative">
+                                <div class="input-group">
+                                    <span class="input-group-text">Chip #:</span>
+                                    <input type="text" class="form-control" name="editCatChipNumber-catId-${i}" id="editCatChipNumber-catId-${i}" value="${addNewCatChipNumber}" />
+                                </div>
+                            </div>                            
     
                             <div class="form-group mb-4">
                                 <div class="input-group">
@@ -244,6 +254,20 @@ if (!catsData) {
                                     <div class=" text-center btn-group w-100 mt-2 p-3" role="group">
                                         <button type="button" class="btn btn-primary btn-lg" id="saveCatShotsStat-catId-${i}">Save</button>
                                         <button type="button" class="btn btn-secondary btn-lg cancelLocalEditBtn">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="shots_dates_container">
+                                    <div class="input-group">
+                                        <span class="input-group-text">1st Shots:</span>
+                                        <input type="date" class="form-control " value="${firstShotsTakenOn}" id="editFirstShotsTextInput-catId-${i}" disabled />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">2nd Shots:</span>
+                                        <input type="date" class="form-control " value="${secondShotsTakenOn}" id="editSecondShotsTextInput-catId-${i}" disabled />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rabies:</span>
+                                        <input type="date" class="form-control " value="${rabiesShotsTakenOn}" id="editRabiesShotsTextInput-catId-${i}" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -360,12 +384,27 @@ function editCat(catId) {
     })
     // handle Shots save:
     const saveShotsStatusBtn = document.getElementById(`saveCatShotsStat-catId-${catId}`);
+    const shots_date_container = document.querySelector('.shots_dates_container');
+    const allDateFields = shots_date_container.querySelectorAll('input[type="date"]');
     saveShotsStatusBtn.addEventListener('click', () => {
         const chosenShotsStatus = document.getElementById(`editCatShotStatusList-catId-${catId}`);
-        let newShotsStatus = chosenShotsStatus.options[chosenShotsStatus.selectedIndex].text;
-        let shotsStatusInput = document.getElementById(`editShotStatusTextInput-catId-${catId}`);
-        shotsStatusInput.value = newShotsStatus;
-        showShotsStatList.parentNode.nextElementSibling.classList.remove('active');
+        if (chosenShotsStatus.value === "No" || chosenShotsStatus.value == "Unknown") {
+            shots_date_container.classList.add('hidden');
+            showShotsStatList.parentNode.nextElementSibling.classList.remove('active');
+            let newShotsStatus = chosenShotsStatus.options[chosenShotsStatus.selectedIndex].text;
+            let shotsStatusInput = document.getElementById(`editShotStatusTextInput-catId-${catId}`);
+            shotsStatusInput.value = newShotsStatus;
+        } else {
+            shots_date_container.classList.remove('hidden');
+            allDateFields.forEach((field) => {
+                field.removeAttribute('disabled');
+            });
+            let newShotsStatus = chosenShotsStatus.options[chosenShotsStatus.selectedIndex].text;
+            let shotsStatusInput = document.getElementById(`editShotStatusTextInput-catId-${catId}`);
+            shotsStatusInput.value = newShotsStatus;
+            showShotsStatList.parentNode.nextElementSibling.classList.remove('active');
+        }
+
     })
     //edit Medication status:
     const showMedsStatusList = document.getElementById(`showMedsStatList-catId-${catId}`);
@@ -429,6 +468,7 @@ function cancelEdit(catId) {
     let thisParent = document.getElementById(`editCatId-${catId}`);
     thisParent.classList.remove('active');
     thisParent.classList.add('hidden');
+    console.log('test cancel click')
     document.getElementById('editCatsWrapper').classList.add('hidden');
 }
 // handling healthTracker:
@@ -548,7 +588,7 @@ if (!catsData) {
                                     </div>
                                     <div class="text-center btn-group w-100 mt-2 p-3" role="group">
                                         <button type="button" class="btn btn-primary btn-lg" id="saveMedication-catId-${i}" >Save</button>
-                                        <button type="button" class="btn btn-secondary btn-lg cancelHealthTrackerRec">Cancel</button>
+                                        <button type="button" class="btn btn-secondary btn-lg cancelMedication-${i}">Cancel</button>
                                     </div>
                                 </div>
                             </div>

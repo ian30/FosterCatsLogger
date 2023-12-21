@@ -40,8 +40,16 @@ saveNewCatBtn.addEventListener('click', () => {
         const addNewCatMedicalNotes = document.getElementById('addNewCatMedicalNotes').value;
         const newCatSpayStatus = document.getElementById('addNewCatSpayedNeutered').value;
         const newCatShotStatus = document.getElementById('addNewCatShotStatus').value;
+        const newCatFirstShotsDate = document.getElementById('addNewCatFirstShotsTakenOn').value;
+        const newCatSecondShotsDate = document.getElementById('addNewCatSecondShotsTakenOn').value;
+        const newCatRabiesShotsDate = document.getElementById('addNewCatRabiesShotsTakenOn').value;
         const newCatWeight = document.getElementById('addNewCatWeight').value;
         const addNewCatWeightTakenOnEl = document.getElementById('addNewCatWeightTakenOn');
+        const isCatChipped = document.getElementById('isCatChipped').value;
+        if (isCatChipped === 'Yes') {
+            const addNewCatChipNumber = document.getElementById('addNewCatChipNumber').value;
+        }
+
         const today = new Date();
         const formattedDate = (today.getMonth() + 1).toString().padStart(2, '0') + '/' +
             today.getDate().toString().padStart(2, '0') + '/' +
@@ -61,6 +69,8 @@ saveNewCatBtn.addEventListener('click', () => {
             id: cat_id,
             name: newCatName,
             breed: newCatBreed,
+            chipped: isCatChipped,
+            chip_number: "65468765435254968",
             dob: newCatDOB,
             age: calcNewCatAge(newCatDOB),
             gender: newCatGender,
@@ -75,6 +85,9 @@ saveNewCatBtn.addEventListener('click', () => {
             },
             spayStatus: newCatSpayStatus,
             shotStatus: newCatShotStatus,
+            firstShotsDate: newCatFirstShotsDate,
+            secondShotsDate: newCatSecondShotsDate,
+            rabiesShotsDate: newCatRabiesShotsDate,
             genericNotes: addNewCatGenericNotes,
             medicationStat: medicationStat,
             medicationTracker: {
