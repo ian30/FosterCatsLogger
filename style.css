@@ -99,3 +99,10 @@ html {
 .healthTrackerWeightRecTable tbody tr:first-child td {
   background-color: #dcebf0;
 }
+
+.shots_badge_el {
+  position: relative;
+  top: 1px;
+  left: 1px;
+  z-index: 9;
+}

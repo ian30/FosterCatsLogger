@@ -2,8 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const demoCats = [
         {
             "id": 0,
-            "name": "Whiskers",
-            "breed": "Siamese",
+            "shelter": "Save The Cats AZ",
+            "shelterId": 0,
+            "name": "Walter",
+            "breed": "Maine Coon",
             "chipped": "Yes",
             "chip_number": "65468765435254968",
             "dob": "2020-01-01",
@@ -22,14 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
             "secondShotsDate": "2022-01-01",
             "rabiesShotsDate": "2023-01-10",
             "genericNotes": "Very playful and loves to nap in the sun.",
-            "medicationStat": "None",
+            "medicationStat": "No",
             "medicationTracker": {},
             "medicalnotes": "Healthy with regular check-ups."
         },
         {
             "id": 1,
-            "name": "Mittens",
-            "breed": "Maine Coon",
+            "shelter": "Save The Cats AZ",
+            "shelterId": 0,
+            "name": "Chrissy",
+            "breed": "Tabby",
             "chipped": "No",
             "chip_number": "",
             "dob": "2019-05-15",
@@ -48,19 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
             "secondShotsDate": "2022-01-01",
             "rabiesShotsDate": "2023-01-10",
             "genericNotes": "Loves attention and is very vocal.",
-            "medicationStat": "None",
+            "medicationStat": "No",
             "medicationTracker": {},
             "medicalnotes": "No known allergies."
         },
         {
             "id": 2,
-            "name": "Shadow",
-            "breed": "British Shorthair",
+            "shelter": "Gratful Hearts",
+            "shelterId": 0,
+            "name": "Boots",
+            "breed": "Tabby",
             "chipped": "Yes",
             "chip_number": "43534532396786456",
             "dob": "2018-10-30",
             "age": "5 yrs 1 mon 2 wks 6 days",
-            "gender": "Male",
+            "gender": "Female",
             "weight": 11,
             "weightTakenOn": "2023-03-05",
             "weightTracker": {
@@ -74,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "secondShotsDate": "2022-01-01",
             "rabiesShotsDate": "2023-01-10",
             "genericNotes": "A bit shy but very affectionate once comfortable.",
-            "medicationStat": "None",
+            "medicationStat": "No",
             "medicationTracker": {},
             "medicalnotes": "Regular vet visits, no major issues."
         }
@@ -129,10 +135,11 @@ const isCatChippedElement = document.getElementById('isCatChipped');
 isCatChippedElement.addEventListener('change', () => {
     const parentEl = isCatChippedElement.parentNode.parentElement.nextElementSibling;
     isCatChipped = isCatChippedElement.value;
+    let chipNumber;
     if (isCatChipped === 'Yes') {
-        //get chip #:
-        let chipNum = document.getElementById('addNewCatChipNumber').value;
         parentEl.classList.remove('hidden');
+        //get chip #:
+        chipNumber = document.getElementById('addNewCatChipNumber').value;
     } else if (isCatChipped === 'No') {
         parentEl.classList.add('hidden');
     } else {
@@ -141,6 +148,7 @@ isCatChippedElement.addEventListener('change', () => {
             console.log('unknown? ', isCatChipped)
         }
     }
+    console.log('chipNum: ', chipNum)
 })
 // shots? 
 const isCatShotsElement = document.getElementById('addNewCatShotStatus');

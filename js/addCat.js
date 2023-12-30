@@ -2,7 +2,12 @@ const addNewCat = document.getElementById('addNewCat');
 const addCatFormWrapper = document.getElementById('addCatFormWrapper');
 const addCatForm = document.getElementById('addCatForm');
 const saveNewCatBtn = document.getElementById('saveNewCatBtn');
-
+const cancelNewCatBtn = document.getElementById('cancelNewCatBtn');
+//if cancel is clicked:
+cancelNewCatBtn.addEventListener('click', () => {
+    document.getElementById('addNewCatForm').classList.remove('active');
+    document.getElementById('addNewCatForm').classList.add('hidden');
+});
 saveNewCatBtn.addEventListener('click', () => {
     const newCatName = document.getElementById('addNewCatName').value;
     const newCatDOB = document.getElementById('addNewCatDOB').value;
@@ -67,10 +72,12 @@ saveNewCatBtn.addEventListener('click', () => {
         // Construct the cat object
         const newCat = {
             id: cat_id,
+            shelter: newCatShelter,
+            shelterId: newCatShelterId,
             name: newCatName,
             breed: newCatBreed,
             chipped: isCatChipped,
-            chip_number: "65468765435254968",
+            chip_number: addNewCatChipNumber,
             dob: newCatDOB,
             age: calcNewCatAge(newCatDOB),
             gender: newCatGender,
