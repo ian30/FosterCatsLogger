@@ -104,6 +104,7 @@ if (!catsData) {
         let catBreed = cat.breed;
         let catGender = cat.gender;
         let catAge = cat.age;
+        let catChipNumber = cat.chip_number;
         let catGenNotes = cat.genericNotes;
         let medicalNotes = cat.medicalnotes;
         let medsStat = cat.medicationStat;
@@ -113,6 +114,7 @@ if (!catsData) {
         let weightTakenOn = cat.weightTakenOn;
         let firstShotsTakenOn = cat.firstShotsDate;
         let secondShotsTakenOn = cat.rabiesShotsDate;
+        let thirdShotsTakenOn = cat.thirdShotsDate;
         let rabiesShotsTakenOn = cat.secondShotsDate;
         //creating edit element for each cat:
         let parentDiv = document.createElement('div');
@@ -206,7 +208,7 @@ if (!catsData) {
                             <div class="form-group mb-4 position-relative">
                                 <div class="input-group">
                                     <span class="input-group-text">Chip #:</span>
-                                    <input type="text" class="form-control" name="editCatChipNumber-catId-${i}" id="editCatChipNumber-catId-${i}" value="${addNewCatChipNumber}" />
+                                    <input type="text" class="form-control" name="editCatChipNumber-catId-${i}" id="editCatChipNumber-catId-${i}" disabled value="${catChipNumber}" />
                                 </div>
                             </div>                            
     
@@ -264,6 +266,10 @@ if (!catsData) {
                                     <div class="input-group">
                                         <span class="input-group-text">2nd Shots:</span>
                                         <input type="date" class="form-control " value="${secondShotsTakenOn}" id="editSecondShotsTextInput-catId-${i}" disabled />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">3rd shots:</span>
+                                        <input type="date" class="form-control" value="${thirdShotsTakenOn}" id="editThirdShotsTextInput-catId-${i}" disabled />
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-text">Rabies:</span>

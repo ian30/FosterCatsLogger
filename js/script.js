@@ -3,7 +3,7 @@ function alert_alt(text) {
     const altAlert = document.createElement('div');
     const backDrop = document.createElement('div');
     backDrop.classList.add('backdrop', 'backdrop_alert');
-    altAlert.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show', 'container', 'custom_alert');
+    altAlert.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show', 'container', 'custom_alert', 'w-50');
     altAlert.setAttribute('role', 'alert');
     altAlert.innerHTML = text;
     document.querySelector('body').appendChild(altAlert);
@@ -19,14 +19,14 @@ document.addEventListener('click', (event) => {
         }
     }
 });
-//listen to esc keydown:
+//listen to esc:
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         document.querySelector('.alert').remove();
         document.querySelector('.backdrop').remove();
     }
 });
-//demo cats:
+//demo cats (if no cats in localStorage):
 document.addEventListener('DOMContentLoaded', () => {
     const demoCats = [
         {
@@ -196,13 +196,19 @@ isCat2ndShotElement.addEventListener('click', () => {
     const targetEl = isCat2ndShotElement.parentNode.nextElementSibling;
     targetEl.classList.toggle('hidden');
 })
+//3rd shot?
+const isCat3rdShotElement = document.getElementById('addNewCatShowThirdShotDate');
+isCat3rdShotElement.addEventListener('click', () => {
+    const targetEl = isCat3rdShotElement.parentNode.nextElementSibling;
+    targetEl.classList.toggle('hidden');
+})
 //rabies shot?
 const isCatRabiesShotElement = document.getElementById('addNewCatShowRabiesShotDate');
 isCatRabiesShotElement.addEventListener('click', () => {
     const targetEl = isCatRabiesShotElement.parentNode.nextElementSibling;
     targetEl.classList.toggle('hidden');
 })
-function alertVal() {
-    var inputVal = document.getElementById('catName').value;
-    alert(inputVal);
-}
+// function alertVal() {
+//     var inputVal = document.getElementById('catName').value;
+//     alert(inputVal);
+// }

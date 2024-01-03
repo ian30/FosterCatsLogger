@@ -3,7 +3,7 @@ const addCatFormWrapper = document.getElementById('addCatFormWrapper');
 const addCatForm = document.getElementById('addCatForm');
 const saveNewCatBtn = document.getElementById('saveNewCatBtn');
 const cancelNewCatBtn = document.getElementById('cancelNewCatBtn');
-//if cancel is clicked:
+//if cancel:
 cancelNewCatBtn.addEventListener('click', () => {
     document.getElementById('addNewCatForm').classList.remove('active');
     document.getElementById('addNewCatForm').classList.add('hidden');
@@ -14,7 +14,7 @@ saveNewCatBtn.addEventListener('click', () => {
     const newCatGender = document.getElementById('addNewCatGender').value;
     const newCatWeight = document.getElementById('addNewCatWeight').value;
     if (!newCatName || !newCatDOB || !newCatGender) {
-        alert_alt(`${newCatName ? '' : 'name,'} ${newCatDOB ? '' : 'date of birth,'} ${newCatGender ? '' : 'gender,'} ${newCatWeight ? '' : 'weight'} cannot be empty`);
+        alert_alt(`${newCatName ? '' : 'Name,'} ${newCatDOB ? '' : 'DOB,'} ${newCatGender ? '' : 'Gender,'} ${newCatWeight ? '' : 'Weight'} cannot be empty`);
         return;
     } else {
         function calcNewCatAge(newCatDOB) {
@@ -49,6 +49,7 @@ saveNewCatBtn.addEventListener('click', () => {
         const newCatShotStatus = document.getElementById('addNewCatShotStatus').value;
         const newCatFirstShotsDate = document.getElementById('addNewCatFirstShotsTakenOn').value;
         const newCatSecondShotsDate = document.getElementById('addNewCatSecondShotsTakenOn').value;
+        const newCatThirdShotsDate = document.getElementById('addNewCatThirdShotsTakenOn').value;
         const newCatRabiesShotsDate = document.getElementById('addNewCatRabiesShotsTakenOn').value;
 
         const addNewCatWeightTakenOnEl = document.getElementById('addNewCatWeightTakenOn');
@@ -97,6 +98,7 @@ saveNewCatBtn.addEventListener('click', () => {
             shotStatus: newCatShotStatus,
             firstShotsDate: newCatFirstShotsDate,
             secondShotsDate: newCatSecondShotsDate,
+            thirdShotsDate: newCatThirdShotsDate,
             rabiesShotsDate: newCatRabiesShotsDate,
             genericNotes: addNewCatGenericNotes,
             medicationStat: medicationStat,
