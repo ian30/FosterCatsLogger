@@ -1,3 +1,32 @@
+//custom alert
+function alert_alt(text) {
+    const altAlert = document.createElement('div');
+    const backDrop = document.createElement('div');
+    backDrop.classList.add('backdrop', 'backdrop_alert');
+    altAlert.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show', 'container', 'custom_alert');
+    altAlert.setAttribute('role', 'alert');
+    altAlert.innerHTML = text;
+    document.querySelector('body').appendChild(altAlert);
+    document.querySelector('body').appendChild(backDrop);
+}
+//listen to mouseclick outside of alert (only if addNewCatForm is active):
+document.addEventListener('click', (event) => {
+    const alert = document.querySelector('.alert');
+    if (addNewCatForm.classList.contains('active') && !addNewCatForm.contains(event.target)) {
+        if (alert && !alert.contains(event.target)) {
+            alert.remove();
+            document.querySelector('.backdrop').remove();
+        }
+    }
+});
+//listen to esc keydown:
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        document.querySelector('.alert').remove();
+        document.querySelector('.backdrop').remove();
+    }
+});
+//demo cats:
 document.addEventListener('DOMContentLoaded', () => {
     const demoCats = [
         {
