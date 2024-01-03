@@ -12,8 +12,10 @@ saveNewCatBtn.addEventListener('click', () => {
     const newCatName = document.getElementById('addNewCatName').value;
     const newCatDOB = document.getElementById('addNewCatDOB').value;
     const newCatGender = document.getElementById('addNewCatGender').value;
-    if (!newCatName) {
-        alert('Please enter cat name');
+    const newCatWeight = document.getElementById('addNewCatWeight').value;
+    if (!newCatName || !newCatDOB || !newCatGender) {
+        alert_alt(`${newCatName ? '' : 'name,'} ${newCatDOB ? '' : 'date of birth,'} ${newCatGender ? '' : 'gender,'} ${newCatWeight ? '' : 'weight'} cannot be empty`);
+        return;
     } else {
         function calcNewCatAge(newCatDOB) {
             const birthDate = new Date(newCatDOB);
@@ -48,11 +50,12 @@ saveNewCatBtn.addEventListener('click', () => {
         const newCatFirstShotsDate = document.getElementById('addNewCatFirstShotsTakenOn').value;
         const newCatSecondShotsDate = document.getElementById('addNewCatSecondShotsTakenOn').value;
         const newCatRabiesShotsDate = document.getElementById('addNewCatRabiesShotsTakenOn').value;
-        const newCatWeight = document.getElementById('addNewCatWeight').value;
+
         const addNewCatWeightTakenOnEl = document.getElementById('addNewCatWeightTakenOn');
         const isCatChipped = document.getElementById('isCatChipped').value;
+        let addNewCatChipNumber;
         if (isCatChipped === 'Yes') {
-            const addNewCatChipNumber = document.getElementById('addNewCatChipNumber').value;
+            addNewCatChipNumber = document.getElementById('addNewCatChipNumber').value;
         }
 
         const today = new Date();
