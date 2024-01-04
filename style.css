@@ -36,6 +36,7 @@ html {
   z-index: 9991;
   top: 190px;
   box-shadow: rgba(100, 100, 111, 0.32) 0px 7px 29px 0px;
+  width: 80%;
   /* border: 4px solid green; */
 }
 .red {
@@ -118,4 +119,7 @@ html {
   top: 0;
   bottom: 0;
   z-index: 9998;
+}
+.blur-background {
+  filter: blur(8px);
 }

@@ -460,8 +460,11 @@ function saveEditedCat(catId) {
         cat.genericNotes = document.getElementById(`editCatNotes-catId-${catId}`).value;
         cat.medicationStat = document.getElementById(`editMedsStatTextInput-catId-${catId}`).value;
         cat.medicalnotes = document.getElementById(`editCatMedicalNotes-catId-${catId}`).value;
-        console.log(cat.spayedNeutered)
-        // Save the updated array back to localStorage
+        cat.firstShotsDate = document.getElementById(`editFirstShotsTextInput-catId-${catId}`).value;
+        cat.secondShotsDate = document.getElementById(`editSecondShotsTextInput-catId-${catId}`).value;
+        cat.thirdShotsDate = document.getElementById(`editThirdShotsTextInput-catId-${catId}`).value;
+        cat.rabiesShotsDate = document.getElementById(`editRabiesShotsTextInput-catId-${catId}`).value;
+        // Save updates back to localStorage
         localStorage.setItem('cats', JSON.stringify(catsData));
         location.reload();
     } else {

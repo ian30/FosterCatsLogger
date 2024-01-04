@@ -1,3 +1,13 @@
+const firstPage = document.getElementById('catsTable');
+const pages = document.querySelectorAll('.page:not(#sheltersWrapper)');
+function closeActivePage() {
+    for (const page of pages) {
+        if (page.classList.contains('active')) {
+            page.classList.remove('active');
+            page.classList.add('hidden');
+        }
+    }
+}
 //custom alert
 function alert_alt(text) {
     const altAlert = document.createElement('div');
@@ -135,12 +145,14 @@ for (let i = 1; i < pageElements.length; i++) {
 //about: 
 const aboutButton = document.getElementById('aboutBtn');
 aboutButton.addEventListener('click', () => {
+    firstPage.classList.toggle('blur-background');
     aboutPageEl.classList.toggle('hidden');
     aboutPageEl.classList.toggle('active');
 });
 //adding cat: 
 const addCatButton = document.getElementById('addNewCat');
 addCatButton.addEventListener('click', () => {
+    firstPage.classList.toggle('blur-background');
     addNewCatPageEl.classList.toggle('hidden');
     addNewCatPageEl.classList.toggle('active');
 });
@@ -208,6 +220,14 @@ isCatRabiesShotElement.addEventListener('click', () => {
     const targetEl = isCatRabiesShotElement.parentNode.nextElementSibling;
     targetEl.classList.toggle('hidden');
 })
+//blur all elements except one with .active class:
+// const activeElement = document.querySelector('.active');
+// const allElements = document.querySelectorAll('*');
+// allElements.forEach(element => {
+//     if (!element.classList.contains('active') || element.classList.contains('firstPage')) {
+//         element.classList.add('blur-background');
+//     }
+// });
 // function alertVal() {
 //     var inputVal = document.getElementById('catName').value;
 //     alert(inputVal);
