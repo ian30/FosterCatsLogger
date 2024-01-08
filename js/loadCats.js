@@ -477,7 +477,6 @@ function cancelEdit(catId) {
     let thisParent = document.getElementById(`editCatId-${catId}`);
     thisParent.classList.remove('active');
     thisParent.classList.add('hidden');
-    console.log('test cancel click')
     document.getElementById('editCatsWrapper').classList.add('hidden');
 }
 // handling healthTracker:
@@ -637,7 +636,6 @@ if (!catsData) {
             sibling.classList.toggle('active');
         });
         let weightValues = document.getElementsByClassName(`recordedWeight-${i}`);
-
         let initWeight = weightTracker[Object.keys(weightTracker)[0]].weight;
         let changeTableCell = document.getElementsByClassName(`weightChangeCell-${i}`);
         for (let i = 0; i < changeTableCell.length; i++) {
@@ -657,12 +655,10 @@ if (!catsData) {
             let idCell = row.insertCell();
             let dateCell = row.insertCell();
             let weightCell = row.insertCell();
-            let changeCell = row.insertCell();
 
             idCell.textContent = weightRecord.id;
             dateCell.textContent = weightRecord.takenOn;
             weightCell.textContent = weightRecord.weight;
-            //changeCell.innerHTML = ` -- `;
         }
         //save weight record:
         const saveWeightRecordBtn = document.getElementById(`saveWeightRecord-catId-${i}`);

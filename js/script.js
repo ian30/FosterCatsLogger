@@ -12,23 +12,25 @@ function closeActivePage() {
 function alert_alt(text) {
     const altAlert = document.createElement('div');
     const backDrop = document.createElement('div');
+    backDrop.setAttribute('id', 'backdrop');
     backDrop.classList.add('backdrop', 'backdrop_alert');
     altAlert.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show', 'container', 'custom_alert', 'w-50');
     altAlert.setAttribute('role', 'alert');
     altAlert.innerHTML = text;
     document.querySelector('body').appendChild(altAlert);
     document.querySelector('body').appendChild(backDrop);
-}
-//listen to mouseclick outside of alert (only if addNewCatForm is active):
-document.addEventListener('click', (event) => {
-    const alert = document.querySelector('.alert');
-    if (addNewCatForm.classList.contains('active') && !addNewCatForm.contains(event.target)) {
-        if (alert && !alert.contains(event.target)) {
-            alert.remove();
-            document.querySelector('.backdrop').remove();
-        }
+    const alertEl = document.querySelector('.alert');
+    const backdropEl = document.getElementById('backdrop');
+    //check if alert is in the dom:
+    if (alertEl) {
+        //listen to mouseclick outside of alert (only if addNewCatForm is active):
+        backDrop.addEventListener('click', (e) => {
+            alertEl.remove();
+            backdropEl.remove();
+        })
     }
-});
+}
+
 //listen to esc:
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
@@ -220,14 +222,6 @@ isCatRabiesShotElement.addEventListener('click', () => {
     const targetEl = isCatRabiesShotElement.parentNode.nextElementSibling;
     targetEl.classList.toggle('hidden');
 })
-//blur all elements except one with .active class:
-// const activeElement = document.querySelector('.active');
-// const allElements = document.querySelectorAll('*');
-// allElements.forEach(element => {
-//     if (!element.classList.contains('active') || element.classList.contains('firstPage')) {
-//         element.classList.add('blur-background');
-//     }
-// });
 // function alertVal() {
 //     var inputVal = document.getElementById('catName').value;
 //     alert(inputVal);
