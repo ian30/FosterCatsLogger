@@ -87,7 +87,7 @@ openShelters.addEventListener('click', () => {
             row.appendChild(id);
             row.appendChild(name);
             row.appendChild(contact);
-            console.log(shelter);
+            console.log('shelter: ', shelter);
         })
         console.log('shelters found in localStorage');
     }
