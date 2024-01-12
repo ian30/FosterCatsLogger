@@ -337,6 +337,7 @@ if (!catsData) {
 }
 function editCat(catId) {
     //showing details for the cat user clicked on:
+    firstPage.classList.add('blur-background');
     let currentCatEditContainer = document.getElementById(`editCatId-${catId}`);
     catsEditContainer.classList.remove('hidden')
     currentCatEditContainer.classList.remove('hidden');
@@ -350,7 +351,6 @@ function editCat(catId) {
     saveNameBtn.addEventListener('click', () => {
         const chosenCatName = document.getElementById(`newCatNameInput-catId-${catId}`);
         let newCatName = chosenCatName.value;
-        console.log('newCatName: ', newCatName);
         let catNameInput = document.getElementById(`editCatNameInput-catId-${catId}`);
         catNameInput.value = newCatName;
         showEditCatNameInput.parentNode.nextElementSibling.classList.remove('active');
@@ -443,7 +443,8 @@ function editCat(catId) {
     // global cancel for local changes (hiding the edit value form):
     const localCancelBtn = document.getElementsByClassName('cancelLocalEditBtn');
     for (let i = 0; i < localCancelBtn.length; i++) {
-        localCancelBtn[i].addEventListener('click', () => {
+        localCancelBtn[i].addEventListener('click', (e) => {
+
             localCancelBtn[i].parentNode.parentElement.classList.remove('active');
         })
     }
@@ -473,11 +474,13 @@ function saveEditedCat(catId) {
 }
 
 function cancelEdit(catId) {
-    console.log(catId)
     let thisParent = document.getElementById(`editCatId-${catId}`);
     thisParent.classList.remove('active');
     thisParent.classList.add('hidden');
     document.getElementById('editCatsWrapper').classList.add('hidden');
+    if (firstPage.classList.contains('blur-background')) {
+        firstPage.classList.toggle('blur-background');
+    }
 }
 // handling healthTracker:
 function idRowCounter() {
@@ -705,12 +708,14 @@ if (!catsData) {
 }
 //showing healthTracker:
 function showHealthTracker(catId) {
+    firstPage.classList.add('blur-background');
     let currentCatHealthTrackerContainer = document.getElementById(`healthTrackerForCatId-${catId}`);
     healthTrackerPageEl.classList.remove('hidden');
     currentCatHealthTrackerContainer.classList.remove('hidden');
 }
 //close health tracker:
 function closeHealthTracker(catId) {
+    firstPage.classList.remove('blur-background');
     let currentCatHealthTrackerContainer = document.getElementById(`healthTrackerForCatId-${catId}`);
     healthTrackerPageEl.classList.add('hidden');
     currentCatHealthTrackerContainer.classList.add('hidden');
