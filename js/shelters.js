@@ -31,11 +31,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getDemoDataIfNoShelters();
 })
+// add new shelter clicked:
+const addNewShelterBtn = document.getElementById('addNewShelterBtn');
+addNewShelterBtn.addEventListener('click', () => {
+    closeActivePage();
+    document.getElementById('addNewShelterForm').classList.toggle('hidden');
+    document.getElementById('addNewShelterForm').classList.toggle('active');
+
+    //cancel add new shelter:
+    const cancelAddNewShelter = document.getElementById('cancelNewShelterBtn');
+    cancelAddNewShelter.addEventListener('click', () => {
+        closeActivePage();
+        firstPage.classList.toggle('blur-background');
+
+    })
+    //save new shelter
+    const saveNewShelterBtn = document.getElementById('saveNewShelterBtn');
+    saveNewShelterBtn.addEventListener('click', () => {
+        let shelterName = document.getElementById('addNewShelterName').value;
+        let shelterCity = document.getElementById('addNewShelterCity').value;
+        let shelterContact = document.getElementById('addNewShelterContact').value;
+        let shelterPhone = document.getElementById('addNewShelterPhone').value;
+        if (!shelterName || !shelterCity || !shelterContact || !shelterPhone) {
+            alert_alt('All fields are required');
+            return;
+        }
+        //save to localStorage
+        let newShelter = {
+            id: Date.now(),
+            name: shelterName,
+            contact: shelterContact,
+            city: shelterCity,
+            phone: shelterPhone
+        }
+        sheltersData.push(newShelter);
+        localStorage.setItem('shelters', JSON.stringify(sheltersData));
+        closeActivePage();
+    })
+
+})
+//shelters nav button clicked
 const openShelters = document.getElementById('sheltersBtn');
 let sheltersData = JSON.parse(localStorage.getItem('shelters'));
 let shelterTableBody = document.querySelector('#sheltersTable tbody');
 shelterTableBody.innerHTML = '';
-//open shelters page
 openShelters.addEventListener('click', () => {
     closeActivePage();
     firstPage.classList.toggle('blur-background');
@@ -76,6 +115,7 @@ openShelters.addEventListener('click', () => {
             let state = document.createElement('td');
             let zip = document.createElement('td');
             let phone = document.createElement('td');
+            let more = document.createElement('td');
             id.innerHTML = i + 1;
             name.innerHTML = shelter.name;
             contact.innerHTML = shelter.contact;
@@ -84,9 +124,14 @@ openShelters.addEventListener('click', () => {
             state.innerHTML = shelter.state;
             zip.innerHTML = shelter.zip;
             phone.innerHTML = shelter.phone;
+            more.innerHTML = `<button class="btn btn-primary" id="moreBtnShelterId-${i}">More</button>`;
             row.appendChild(id);
             row.appendChild(name);
+            row.appendChild(city);
             row.appendChild(contact);
+            row.appendChild(phone);
+            row.appendChild(more);
+            shelterTableBody.appendChild(row);
             console.log('shelter: ', shelter);
         })
         console.log('shelters found in localStorage');

@@ -30,7 +30,6 @@ function alert_alt(text) {
         })
     }
 }
-
 //listen to esc:
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
@@ -210,7 +209,7 @@ isCat2ndShotElement.addEventListener('click', () => {
     const targetEl = isCat2ndShotElement.parentNode.nextElementSibling;
     targetEl.classList.toggle('hidden');
 })
-//3rd shot?
+//3rd shot? (high pitch mandatory)
 const isCat3rdShotElement = document.getElementById('addNewCatShowThirdShotDate');
 isCat3rdShotElement.addEventListener('click', () => {
     const targetEl = isCat3rdShotElement.parentNode.nextElementSibling;
