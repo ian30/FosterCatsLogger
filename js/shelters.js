@@ -1,4 +1,4 @@
-//if no shelter in localstorage, add demo ones:
+//if no shelters in localstorage, add demo ones:
 document.addEventListener('DOMContentLoaded', () => {
     const demoShelters = [
         {
@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function getDemoDataIfNoShelters() {
         if (!localStorage.getItem('shelters')) {
             localStorage.setItem('shelters', JSON.stringify(demoShelters));
+        } else {
+            sheltersData = JSON.parse(localStorage.getItem('shelters'));
+            return;
         }
     }
     getDemoDataIfNoShelters();
@@ -38,7 +41,7 @@ addNewShelterBtn.addEventListener('click', () => {
     document.getElementById('addNewShelterForm').classList.toggle('hidden');
     document.getElementById('addNewShelterForm').classList.toggle('active');
 
-    //cancel add new shelter:
+    //cancel add shelter:
     const cancelAddNewShelter = document.getElementById('cancelNewShelterBtn');
     cancelAddNewShelter.addEventListener('click', () => {
         closeActivePage();
@@ -56,7 +59,6 @@ addNewShelterBtn.addEventListener('click', () => {
             alert_alt('All fields are required');
             return;
         }
-        //save to localStorage
         let newShelter = {
             id: Date.now(),
             name: shelterName,
@@ -66,7 +68,7 @@ addNewShelterBtn.addEventListener('click', () => {
         }
         sheltersData.push(newShelter);
         localStorage.setItem('shelters', JSON.stringify(sheltersData));
-        closeActivePage();
+        location.reload();
     })
 })
 //shelters nav button clicked
@@ -75,17 +77,23 @@ let sheltersData = JSON.parse(localStorage.getItem('shelters'));
 let shelterTableBody = document.querySelector('#sheltersTable tbody');
 shelterTableBody.innerHTML = '';
 openShelters.addEventListener('click', () => {
-    closeActivePage();
+    //clean form inputs:
+    document.getElementById('addNewShelterName').value = '';
+    document.getElementById('addNewShelterAddress1').value = '';
+    document.getElementById('addNewShelterAddress2').value = '';
+    document.getElementById('addNewShelterCity').value = '';
+    document.getElementById('addNewShelterState').value = '';
+    document.getElementById('addNewShelterZip').value = '';
+    document.getElementById('addNewShelterContact').value = '';
+    document.getElementById('addNewShelterPhone').value = '';
+
     firstPage.classList.toggle('blur-background');
     document.getElementById('sheltersWrapper').classList.toggle('hidden');
     document.getElementById('sheltersWrapper').classList.toggle('active');
     if (!sheltersData) {
         alert_alt(`No shelters found, a new local shelter database will be created on this device. Click anywhere to dismiss this message.`, 'No Shelters', 'success');
         //sheltersData = [];
-        getDemoDataIfNoShelters();
-        localStorage.setItem('shelters', JSON.stringify(sheltersData));
         const addNewShelterBtn = document.getElementById('addNewShelterBtn');
-        console.log('no shelters in localStorage');
         let blinking = false;
         let blinkClass1 = 'btn-primary';
         let blinkClass2 = 'btn-danger';
@@ -123,7 +131,7 @@ openShelters.addEventListener('click', () => {
             state.innerHTML = shelter.state;
             zip.innerHTML = shelter.zip;
             phone.innerHTML = shelter.phone;
-            more.innerHTML = `<button class="btn btn-primary btn-sm w-100" id="moreBtnShelterId-${i}">More</button>`;
+            more.innerHTML = `<button class="btn btn-primary disabled btn-sm w-100" id="moreBtnShelterId-${i}">More</button>`;
             row.appendChild(id);
             row.appendChild(name);
             row.appendChild(city);
@@ -131,7 +139,6 @@ openShelters.addEventListener('click', () => {
             row.appendChild(phone);
             row.appendChild(more);
             shelterTableBody.appendChild(row);
-            console.log('shelter: ', shelter);
         })
     }
 })

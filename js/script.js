@@ -1,5 +1,6 @@
 const firstPage = document.getElementById('catsTable');
-const pages = document.querySelectorAll('.page:not(#sheltersWrapper)');
+//const pages = document.querySelectorAll('.page:not(#sheltersWrapper)');
+const pages = document.querySelectorAll('.page');
 function closeActivePage() {
     for (const page of pages) {
         if (page.classList.contains('active')) {
@@ -33,8 +34,22 @@ function alert_alt(text) {
 //listen to esc:
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-        document.querySelector('.alert').remove();
-        document.querySelector('.backdrop').remove();
+        const alertElement = document.querySelector('.alert');
+        const backdropElement = document.getElementById('backdrop');
+        if (alertElement) {
+            alertElement.remove();
+        } else if (backdropElement) {
+            backdropElement.remove();
+        } else {
+            console.log('no alert or backdrop found');
+        }
+        for (i = 0; i < pages.length; i++) {
+            if (pages[i].classList.contains('active')) {
+                pages[i].classList.remove('active');
+                pages[i].classList.add('hidden');
+                firstPage.classList.remove('blur-background');
+            }
+        }
     }
 });
 //demo cats (if no cats in localStorage):
