@@ -40,13 +40,11 @@ addNewShelterBtn.addEventListener('click', () => {
     closeActivePage();
     document.getElementById('addNewShelterForm').classList.toggle('hidden');
     document.getElementById('addNewShelterForm').classList.toggle('active');
-
     //cancel add shelter:
     const cancelAddNewShelter = document.getElementById('cancelNewShelterBtn');
     cancelAddNewShelter.addEventListener('click', () => {
         closeActivePage();
         firstPage.classList.toggle('blur-background');
-
     })
     //save new shelter
     const saveNewShelterBtn = document.getElementById('saveNewShelterBtn');
@@ -68,6 +66,15 @@ addNewShelterBtn.addEventListener('click', () => {
         }
         sheltersData.push(newShelter);
         localStorage.setItem('shelters', JSON.stringify(sheltersData));
+        //clean form inputs:
+        document.getElementById('addNewShelterName').value = '';
+        document.getElementById('addNewShelterAddress1').value = '';
+        document.getElementById('addNewShelterAddress2').value = '';
+        document.getElementById('addNewShelterCity').value = '';
+        document.getElementById('addNewShelterState').value = '';
+        document.getElementById('addNewShelterZip').value = '';
+        document.getElementById('addNewShelterContact').value = '';
+        document.getElementById('addNewShelterPhone').value = '';
         location.reload();
     })
 })
@@ -77,23 +84,12 @@ let sheltersData = JSON.parse(localStorage.getItem('shelters'));
 let shelterTableBody = document.querySelector('#sheltersTable tbody');
 shelterTableBody.innerHTML = '';
 openShelters.addEventListener('click', () => {
-    //clean form inputs:
-    document.getElementById('addNewShelterName').value = '';
-    document.getElementById('addNewShelterAddress1').value = '';
-    document.getElementById('addNewShelterAddress2').value = '';
-    document.getElementById('addNewShelterCity').value = '';
-    document.getElementById('addNewShelterState').value = '';
-    document.getElementById('addNewShelterZip').value = '';
-    document.getElementById('addNewShelterContact').value = '';
-    document.getElementById('addNewShelterPhone').value = '';
-
     firstPage.classList.toggle('blur-background');
     document.getElementById('sheltersWrapper').classList.toggle('hidden');
     document.getElementById('sheltersWrapper').classList.toggle('active');
     if (!sheltersData) {
         alert_alt(`No shelters found, a new local shelter database will be created on this device. Click anywhere to dismiss this message.`, 'No Shelters', 'success');
         //sheltersData = [];
-        const addNewShelterBtn = document.getElementById('addNewShelterBtn');
         let blinking = false;
         let blinkClass1 = 'btn-primary';
         let blinkClass2 = 'btn-danger';
