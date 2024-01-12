@@ -68,7 +68,6 @@ addNewShelterBtn.addEventListener('click', () => {
         localStorage.setItem('shelters', JSON.stringify(sheltersData));
         closeActivePage();
     })
-
 })
 //shelters nav button clicked
 const openShelters = document.getElementById('sheltersBtn');
@@ -124,7 +123,7 @@ openShelters.addEventListener('click', () => {
             state.innerHTML = shelter.state;
             zip.innerHTML = shelter.zip;
             phone.innerHTML = shelter.phone;
-            more.innerHTML = `<button class="btn btn-primary" id="moreBtnShelterId-${i}">More</button>`;
+            more.innerHTML = `<button class="btn btn-primary btn-sm w-100" id="moreBtnShelterId-${i}">More</button>`;
             row.appendChild(id);
             row.appendChild(name);
             row.appendChild(city);
@@ -134,6 +133,5 @@ openShelters.addEventListener('click', () => {
             shelterTableBody.appendChild(row);
             console.log('shelter: ', shelter);
         })
-        console.log('shelters found in localStorage');
     }
 })
