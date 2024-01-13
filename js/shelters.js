@@ -1,3 +1,4 @@
+const addNewShelterFormEl = document.getElementById('addNewShelterForm');
 //if no shelters in localstorage, add demo ones:
 document.addEventListener('DOMContentLoaded', () => {
     const demoShelters = [
@@ -37,13 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // add new shelter clicked:
 const addNewShelterBtn = document.getElementById('addNewShelterBtn');
 addNewShelterBtn.addEventListener('click', () => {
-    document.getElementById('addNewShelterForm').classList.toggle('hidden');
-    document.getElementById('addNewShelterForm').classList.toggle('active');
+    addNewShelterFormEl.classList.toggle('hidden');
+    addNewShelterFormEl.classList.toggle('active');
     //cancel add shelter:
     const cancelAddNewShelter = document.getElementById('cancelNewShelterBtn');
     cancelAddNewShelter.addEventListener('click', () => {
-        closeActivePage();
-        firstPage.classList.toggle('blur-background');
+        addNewShelterFormEl.classList.add('hidden');
+        addNewShelterFormEl.classList.remove('active');
+        console.log('cancel add new shelter');
     })
     //save new shelter
     const saveNewShelterBtn = document.getElementById('saveNewShelterBtn');

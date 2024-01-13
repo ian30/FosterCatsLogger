@@ -477,7 +477,8 @@ function cancelEdit(catId) {
     let thisParent = document.getElementById(`editCatId-${catId}`);
     thisParent.classList.remove('active');
     thisParent.classList.add('hidden');
-    document.getElementById('editCatsWrapper').classList.add('hidden');
+    catsEditContainer.classList.add('hidden');
+    catsEditContainer.classList.remove('active');
     if (firstPage.classList.contains('blur-background')) {
         firstPage.classList.toggle('blur-background');
     }

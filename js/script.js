@@ -160,11 +160,27 @@ aboutButton.addEventListener('click', () => {
     aboutPageEl.classList.toggle('active');
 });
 //adding cat: 
+const sheltersWrapperEl = document.getElementById('sheltersWrapper');
 const addCatButton = document.getElementById('addNewCat');
 addCatButton.addEventListener('click', () => {
-    firstPage.classList.toggle('blur-background');
-    addNewCatPageEl.classList.toggle('hidden');
-    addNewCatPageEl.classList.toggle('active');
+    for (const page of pageElements) {
+        //console.log('page: ', page);
+        if (page.classList.contains('active')) {
+            console.log('active: ', page)
+            page.classList.remove('active');
+            page.classList.add('hidden');
+            addNewCatPageEl.classList.toggle('hidden');
+            addNewCatPageEl.classList.toggle('active');
+        } else {
+            addNewCatPageEl.classList.toggle('hidden');
+            addNewCatPageEl.classList.toggle('active');
+        }
+    }
+    // if (sheltersWrapperEl) {
+    //     sheltersWrapperEl.classList.add('hidden');
+    //     sheltersWrapperEl.classList.remove('active');
+    // }
+
 
 });
 function deleteCat(index) {
