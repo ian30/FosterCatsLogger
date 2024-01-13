@@ -1,4 +1,5 @@
 const addNewShelterFormEl = document.getElementById('addNewShelterForm');
+const shelterWrapperEl = document.getElementById('sheltersWrapper');
 //if no shelters in localstorage, add demo ones:
 document.addEventListener('DOMContentLoaded', () => {
     const demoShelters = [
@@ -85,9 +86,22 @@ let sheltersData = JSON.parse(localStorage.getItem('shelters'));
 let shelterTableBody = document.querySelector('#sheltersTable tbody');
 shelterTableBody.innerHTML = '';
 openShelters.addEventListener('click', () => {
-    firstPage.classList.toggle('blur-background');
-    document.getElementById('sheltersWrapper').classList.toggle('hidden');
-    document.getElementById('sheltersWrapper').classList.toggle('active');
+    if (aboutPageEl.classList.contains('active')) {
+        aboutPageEl.classList.remove('active');
+        aboutPageEl.classList.add('hidden');
+        shelterWrapperEl.classList.remove('hidden');
+        shelterWrapperEl.classList.add('active');
+    } else if (addNewCatPageEl.classList.contains('active')) {
+        addNewCatPageEl.classList.remove('active');
+        addNewCatPageEl.classList.add('hidden');
+        shelterWrapperEl.classList.remove('hidden');
+        shelterWrapperEl.classList.add('active');
+    } else {
+        firstPage.classList.toggle('blur-background');
+        shelterWrapperEl.classList.toggle('hidden');
+        shelterWrapperEl.classList.toggle('active');
+    }
+
     if (!sheltersData) {
         alert_alt(`No shelters found, a new local shelter database will be created on this device. Click anywhere to dismiss this message.`, 'No Shelters', 'success');
         //sheltersData = [];

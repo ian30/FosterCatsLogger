@@ -145,7 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getDemoDataIfNoCats();
 })
-
+//open close windows:
+function closeCurrentOpenWindow(windowObject) {
+    windowObject.classList.add('hidden');
+}
 
 // hide everything but front page:
 for (let i = 1; i < pageElements.length; i++) {
@@ -154,32 +157,52 @@ for (let i = 1; i < pageElements.length; i++) {
 //about: 
 const aboutButton = document.getElementById('aboutBtn');
 aboutButton.addEventListener('click', () => {
+    if (sheltersWrapperEl.classList.contains('active')) {
+        console.log('shelter window is active')
+        sheltersWrapperEl.classList.add('hidden');
+        sheltersWrapperEl.classList.remove('active');
+        aboutPageEl.classList.remove('hidden');
+        aboutPageEl.classList.add('active');
 
-    firstPage.classList.toggle('blur-background');
-    aboutPageEl.classList.toggle('hidden');
-    aboutPageEl.classList.toggle('active');
+    } else if (addNewCatPageEl.classList.contains('active')) {
+        console.log('about window is active')
+        addNewCatPageEl.classList.add('hidden');
+        addNewCatPageEl.classList.remove('active');
+        aboutPageEl.classList.remove('hidden');
+        aboutPageEl.classList.add('active');
+
+    } else {
+        firstPage.classList.toggle('blur-background');
+        aboutPageEl.classList.toggle('hidden');
+        aboutPageEl.classList.toggle('active');
+    }
+    // firstPage.classList.toggle('blur-background');
+    // aboutPageEl.classList.toggle('hidden');
+    // aboutPageEl.classList.toggle('active');
 });
 //adding cat: 
 const sheltersWrapperEl = document.getElementById('sheltersWrapper');
 const addCatButton = document.getElementById('addNewCat');
 addCatButton.addEventListener('click', () => {
-    for (const page of pageElements) {
-        //console.log('page: ', page);
-        if (page.classList.contains('active')) {
-            console.log('active: ', page)
-            page.classList.remove('active');
-            page.classList.add('hidden');
-            addNewCatPageEl.classList.toggle('hidden');
-            addNewCatPageEl.classList.toggle('active');
-        } else {
-            addNewCatPageEl.classList.toggle('hidden');
-            addNewCatPageEl.classList.toggle('active');
-        }
+    if (sheltersWrapperEl.classList.contains('active')) {
+        console.log('shelter window is active')
+        sheltersWrapperEl.classList.add('hidden');
+        sheltersWrapperEl.classList.remove('active');
+        addNewCatPageEl.classList.remove('hidden');
+        addNewCatPageEl.classList.add('active');
+
+    } else if (aboutPageEl.classList.contains('active')) {
+        console.log('about window is active')
+        aboutPageEl.classList.add('hidden');
+        aboutPageEl.classList.remove('active');
+        addNewCatPageEl.classList.remove('hidden');
+        addNewCatPageEl.classList.add('active');
+
+    } else {
+        firstPage.classList.toggle('blur-background');
+        addNewCatPageEl.classList.toggle('hidden');
+        addNewCatPageEl.classList.toggle('active');
     }
-    // if (sheltersWrapperEl) {
-    //     sheltersWrapperEl.classList.add('hidden');
-    //     sheltersWrapperEl.classList.remove('active');
-    // }
 
 
 });
