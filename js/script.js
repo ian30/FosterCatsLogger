@@ -1,14 +1,11 @@
 const firstPage = document.getElementById('catsTable');
+const pageElements = document.querySelectorAll('.page:not(#editCatWrapper)');
+const aboutPageEl = document.getElementById('about');
+const addNewCatPageEl = document.getElementById('addNewCatForm');
+const editCatWrapperEl = document.getElementById('editCatsWrapper');
+const catEditContainerEl = document.querySelectorAll('.newCatEditContiner');
 //const pages = document.querySelectorAll('.page:not(#sheltersWrapper)');
 const pages = document.querySelectorAll('.page');
-function closeActivePage() {
-    for (const page of pages) {
-        if (page.classList.contains('active')) {
-            page.classList.remove('active');
-            page.classList.add('hidden');
-        }
-    }
-}
 //custom alert
 function alert_alt(text) {
     const altAlert = document.createElement('div');
@@ -149,11 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getDemoDataIfNoCats();
 })
 
-const pageElements = document.querySelectorAll('.page:not(#editCatWrapper)');
-const aboutPageEl = document.getElementById('about');
-const addNewCatPageEl = document.getElementById('addNewCatForm');
-const editCatWrapperEl = document.getElementById('editCatsWrapper');
-const catEditContainerEl = document.querySelectorAll('.newCatEditContiner');
+
 // hide everything but front page:
 for (let i = 1; i < pageElements.length; i++) {
     pageElements[i].classList.add('hidden');
@@ -161,6 +154,7 @@ for (let i = 1; i < pageElements.length; i++) {
 //about: 
 const aboutButton = document.getElementById('aboutBtn');
 aboutButton.addEventListener('click', () => {
+
     firstPage.classList.toggle('blur-background');
     aboutPageEl.classList.toggle('hidden');
     aboutPageEl.classList.toggle('active');
@@ -171,6 +165,7 @@ addCatButton.addEventListener('click', () => {
     firstPage.classList.toggle('blur-background');
     addNewCatPageEl.classList.toggle('hidden');
     addNewCatPageEl.classList.toggle('active');
+
 });
 function deleteCat(index) {
     if (!confirm("Do you want to delete the cat? (this cannot be undone)")) {

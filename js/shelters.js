@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // add new shelter clicked:
 const addNewShelterBtn = document.getElementById('addNewShelterBtn');
 addNewShelterBtn.addEventListener('click', () => {
-    closeActivePage();
     document.getElementById('addNewShelterForm').classList.toggle('hidden');
     document.getElementById('addNewShelterForm').classList.toggle('active');
     //cancel add shelter:

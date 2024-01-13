@@ -339,7 +339,8 @@ function editCat(catId) {
     //showing details for the cat user clicked on:
     firstPage.classList.add('blur-background');
     let currentCatEditContainer = document.getElementById(`editCatId-${catId}`);
-    catsEditContainer.classList.remove('hidden')
+    catsEditContainer.classList.remove('hidden');
+    catsEditContainer.classList.add('active');
     currentCatEditContainer.classList.remove('hidden');
     //change name:
     const showEditCatNameInput = document.getElementById(`showCatNameInput-catId-${catId}`);
@@ -394,6 +395,7 @@ function editCat(catId) {
     const allDateFields = shots_date_container.querySelectorAll('input[type="date"]');
     saveShotsStatusBtn.addEventListener('click', () => {
         const chosenShotsStatus = document.getElementById(`editCatShotStatusList-catId-${catId}`);
+        console.log('chosenShotsStatus: ', chosenShotsStatus.value)
         if (chosenShotsStatus.value === "No" || chosenShotsStatus.value == "Unknown") {
             shots_date_container.classList.add('hidden');
             showShotsStatList.parentNode.nextElementSibling.classList.remove('active');
@@ -410,7 +412,6 @@ function editCat(catId) {
             shotsStatusInput.value = newShotsStatus;
             showShotsStatList.parentNode.nextElementSibling.classList.remove('active');
         }
-
     })
     //edit Medication status:
     const showMedsStatusList = document.getElementById(`showMedsStatList-catId-${catId}`);
@@ -444,7 +445,6 @@ function editCat(catId) {
     const localCancelBtn = document.getElementsByClassName('cancelLocalEditBtn');
     for (let i = 0; i < localCancelBtn.length; i++) {
         localCancelBtn[i].addEventListener('click', (e) => {
-
             localCancelBtn[i].parentNode.parentElement.classList.remove('active');
         })
     }
@@ -605,7 +605,6 @@ if (!catsData) {
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
             <div class="row">
