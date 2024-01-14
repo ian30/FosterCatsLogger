@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getDemoDataIfNoCats();
 })
-//open close windows:
 function closeActivePage(sourceEl, target1El, target2El) {
     if (target1El.classList.contains('active')) {
         target1El.classList.add('hidden');
