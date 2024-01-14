@@ -4,7 +4,6 @@ const aboutPageEl = document.getElementById('about');
 const addNewCatPageEl = document.getElementById('addNewCatForm');
 const editCatWrapperEl = document.getElementById('editCatsWrapper');
 const catEditContainerEl = document.querySelectorAll('.newCatEditContiner');
-//const pages = document.querySelectorAll('.page:not(#sheltersWrapper)');
 const pages = document.querySelectorAll('.page');
 //custom alert
 function alert_alt(text) {
@@ -146,8 +145,22 @@ document.addEventListener('DOMContentLoaded', () => {
     getDemoDataIfNoCats();
 })
 //open close windows:
-function closeCurrentOpenWindow(windowObject) {
-    windowObject.classList.add('hidden');
+function closeActivePage(sourceEl, target1El, target2El) {
+    if (target1El.classList.contains('active')) {
+        target1El.classList.add('hidden');
+        target1El.classList.remove('active');
+        sourceEl.classList.remove('hidden');
+        sourceEl.classList.add('active');
+    } else if (target2El.classList.contains('active')) {
+        target2El.classList.add('hidden');
+        target2El.classList.remove('active');
+        sourceEl.classList.remove('hidden');
+        sourceEl.classList.add('active');
+    } else {
+        firstPage.classList.toggle('blur-background');
+        sourceEl.classList.toggle('hidden');
+        sourceEl.classList.toggle('active');
+    }
 }
 
 // hide everything but front page:
@@ -157,53 +170,13 @@ for (let i = 1; i < pageElements.length; i++) {
 //about: 
 const aboutButton = document.getElementById('aboutBtn');
 aboutButton.addEventListener('click', () => {
-    if (sheltersWrapperEl.classList.contains('active')) {
-        console.log('shelter window is active')
-        sheltersWrapperEl.classList.add('hidden');
-        sheltersWrapperEl.classList.remove('active');
-        aboutPageEl.classList.remove('hidden');
-        aboutPageEl.classList.add('active');
-
-    } else if (addNewCatPageEl.classList.contains('active')) {
-        console.log('about window is active')
-        addNewCatPageEl.classList.add('hidden');
-        addNewCatPageEl.classList.remove('active');
-        aboutPageEl.classList.remove('hidden');
-        aboutPageEl.classList.add('active');
-
-    } else {
-        firstPage.classList.toggle('blur-background');
-        aboutPageEl.classList.toggle('hidden');
-        aboutPageEl.classList.toggle('active');
-    }
-    // firstPage.classList.toggle('blur-background');
-    // aboutPageEl.classList.toggle('hidden');
-    // aboutPageEl.classList.toggle('active');
+    closeActivePage(aboutPageEl, sheltersWrapperEl, addNewCatPageEl);
 });
 //adding cat: 
 const sheltersWrapperEl = document.getElementById('sheltersWrapper');
 const addCatButton = document.getElementById('addNewCat');
 addCatButton.addEventListener('click', () => {
-    if (sheltersWrapperEl.classList.contains('active')) {
-        console.log('shelter window is active')
-        sheltersWrapperEl.classList.add('hidden');
-        sheltersWrapperEl.classList.remove('active');
-        addNewCatPageEl.classList.remove('hidden');
-        addNewCatPageEl.classList.add('active');
-
-    } else if (aboutPageEl.classList.contains('active')) {
-        console.log('about window is active')
-        aboutPageEl.classList.add('hidden');
-        aboutPageEl.classList.remove('active');
-        addNewCatPageEl.classList.remove('hidden');
-        addNewCatPageEl.classList.add('active');
-
-    } else {
-        firstPage.classList.toggle('blur-background');
-        addNewCatPageEl.classList.toggle('hidden');
-        addNewCatPageEl.classList.toggle('active');
-    }
-
+    closeActivePage(addNewCatPageEl, sheltersWrapperEl, aboutPageEl);
 
 });
 function deleteCat(index) {
@@ -239,7 +212,7 @@ isCatChippedElement.addEventListener('change', () => {
             console.log('unknown? ', isCatChipped)
         }
     }
-    console.log('chipNum: ', chipNum)
+    console.log('chipNum: ', chipNumber)
 })
 // shots? 
 const isCatShotsElement = document.getElementById('addNewCatShotStatus');

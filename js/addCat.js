@@ -1,12 +1,14 @@
 const addNewCat = document.getElementById('addNewCat');
 const addCatFormWrapper = document.getElementById('addCatFormWrapper');
 const addCatForm = document.getElementById('addCatForm');
+const addNewCatFormEl = document.getElementById('addNewCatForm');
 const saveNewCatBtn = document.getElementById('saveNewCatBtn');
 const cancelNewCatBtn = document.getElementById('cancelNewCatBtn');
 //if cancel:
 cancelNewCatBtn.addEventListener('click', () => {
-    document.getElementById('addNewCatForm').classList.remove('active');
-    document.getElementById('addNewCatForm').classList.add('hidden');
+    addNewCatFormEl.classList.remove('active');
+    addNewCatFormEl.classList.add('hidden');
+    firstPage.classList.toggle('blur-background');
 });
 saveNewCatBtn.addEventListener('click', () => {
     const newCatName = document.getElementById('addNewCatName').value;
@@ -51,7 +53,7 @@ saveNewCatBtn.addEventListener('click', () => {
         const newCatSecondShotsDate = document.getElementById('addNewCatSecondShotsTakenOn').value;
         const newCatThirdShotsDate = document.getElementById('addNewCatThirdShotsTakenOn').value;
         const newCatRabiesShotsDate = document.getElementById('addNewCatRabiesShotsTakenOn').value;
-
+        const newCatShelter = document.getElementById('addNewCatShelter').value;
         const addNewCatWeightTakenOnEl = document.getElementById('addNewCatWeightTakenOn');
         const isCatChipped = document.getElementById('isCatChipped').value;
         let addNewCatChipNumber;
@@ -77,7 +79,6 @@ saveNewCatBtn.addEventListener('click', () => {
         const newCat = {
             id: cat_id,
             shelter: newCatShelter,
-            shelterId: newCatShelterId,
             name: newCatName,
             breed: newCatBreed,
             chipped: isCatChipped,
